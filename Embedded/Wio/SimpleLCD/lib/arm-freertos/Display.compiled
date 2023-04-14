@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="C:\fpcupsystems\embeddednewest\fpc\bin\i386-win32\fpc.exe" Date="1452121707"/>
+  <Params Value=" -Tfreertos -Parm -CpARMV7EM -MObjFPC -Scghi -O3 -k-check-sections -k-gc-sections -k-unresolved-symbols=report-all -l -vewnhibq -FiC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\simple\lib\arm-freertos -FiC:\fpcupsystems\embeddednewest\ccr\mbf-freertos-don\source -FuC:\fpcupsystems\embeddednewest\ccr\mbf-freertos-don\source -FuC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\simple\ -FUC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\simple\lib\arm-freertos\ -FEC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\simple\bin\ -oC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\simple\bin\Display -Wpwio_terminal -dfreertos_fat -Xu Display.lpr"/>
+</CONFIG>
