@@ -5,6 +5,7 @@ RDO = Rich Data Object.
 DTO = Data Transfer Object.
 The application is based on the use of plain TCollections as RDO.  
 The data from these RDO are persisted in a database through compatible DTO.  
+The persistence layer is based on the use of plain TORM as DTO.  
 
 https://wiki.freepascal.org/TCollection
 
