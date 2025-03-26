@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units Count="51">
+      <Unit0>
+        <Filename Value="BatteryDataServer.dpr"/>
+        <IsPartOfProject Value="True"/>
+        <TopLine Value="4"/>
+        <CursorPos X="6" Y="13"/>
+        <UsageCount Value="31"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="data.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="31"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="server.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="26"/>
+        <CursorPos X="3" Y="37"/>
+        <UsageCount Value="31"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="DomRepositoryInterfaces.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="31"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="InfraRepositoryImplementation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="31"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="DomServiceImplementation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="31"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="DomServiceInterfaces.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="31"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="DomTypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="31"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="InfraTypes.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="9"/>
+        <CursorPos Y="35"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\infra\InfraRepositoryImplementation.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos X="73" Y="40"/>
+        <UsageCount Value="13"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\dom\DomServiceInterfaces.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="85" Y="9"/>
+        <UsageCount Value="13"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\dom\DomServiceImplementation.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos Y="31"/>
+        <UsageCount Value="13"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\dom\DomTypes.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="16" Y="5"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\dom\DomRepositoryInterfaces.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="5"/>
+        <CursorPos Y="8"/>
+        <UsageCount Value="13"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\mormot.defines.inc"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\orm\mormot.orm.core.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="4060"/>
+        <CursorPos X="17" Y="4072"/>
+        <UsageCount Value="11"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\..\Share\Dto\batterydto.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="14"/>
+        <CursorPos X="24" Y="27"/>
+        <UsageCount Value="13"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="..\..\Share\Dom\batterydom.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="31"/>
+        <CursorPos X="14" Y="51"/>
+        <UsageCount Value="13"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\orm\mormot.orm.base.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="613"/>
+        <CursorPos X="45" Y="651"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.rtti.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2883"/>
+        <CursorPos X="15" Y="2900"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\test\test.core.base.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2473"/>
+        <CursorPos Y="2496"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.json.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2383"/>
+        <CursorPos X="81" Y="2407"/>
+        <UsageCount Value="11"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="..\..\Share\Infra\batteryinfra.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="30"/>
+        <CursorPos Y="92"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\test\test.soa.network.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="333"/>
+        <CursorPos X="76" Y="341"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\rest\mormot.rest.http.server.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1110"/>
+        <CursorPos Y="1122"/>
+        <UsageCount Value="10"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="..\infra\infraserviceimplementation.pas"/>
+        <UnitName Value="InfraServiceImplementation"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="21" Y="8"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\rest\mormot.rest.memserver.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="160"/>
+        <CursorPos X="24" Y="170"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\test\test.orm.core.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="241"/>
+        <CursorPos X="50" Y="257"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\test\test.orm.extdb.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="267"/>
+        <CursorPos X="13" Y="279"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\rest\mormot.rest.server.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="7570"/>
+        <CursorPos Y="7587"/>
+        <UsageCount Value="11"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\soa\mormot.soa.codegen.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1781"/>
+        <CursorPos X="23" Y="1791"/>
+        <UsageCount Value="10"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.text.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="9497"/>
+        <CursorPos Y="9510"/>
+        <UsageCount Value="10"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.interfaces.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="7416"/>
+        <CursorPos Y="7619"/>
+        <UsageCount Value="10"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="..\..\Share\Dom\rundatadom.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="386"/>
+        <CursorPos Y="404"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="..\..\Share\Infra\rundatainfra.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="116"/>
+        <CursorPos X="5" Y="142"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\db\mormot.db.raw.sqlite3.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="28" Y="4"/>
+        <UsageCount Value="10"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\orm\mormot.orm.sqlite3.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="703"/>
+        <CursorPos X="8" Y="716"/>
+        <UsageCount Value="10"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\app\mormot.app.daemon.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="254"/>
+        <CursorPos X="9" Y="268"/>
+        <UsageCount Value="10"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.log.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="4"/>
+        <UsageCount Value="10"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="..\services\document\documentrepointerface.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="23"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="..\services\document\documentrepoimplementation.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="..\services\document\documentserviceinterface.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="..\services\battery\batteryserviceimplementation.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="42"/>
+        <CursorPos Y="65"/>
+        <UsageCount Value="11"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="..\services\rundata\rundataserviceimplementation.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="49"/>
+        <CursorPos Y="54"/>
+        <UsageCount Value="11"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\soa\mormot.soa.server.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="65"/>
+        <CursorPos X="3" Y="65"/>
+        <UsageCount Value="10"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\net\mormot.net.server.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="6828"/>
+        <CursorPos Y="6842"/>
+        <UsageCount Value="10"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\lib\mormot.lib.winhttp.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2072"/>
+        <CursorPos Y="2086"/>
+        <UsageCount Value="10"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\net\mormot.net.http.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3700"/>
+        <CursorPos Y="3724"/>
+        <UsageCount Value="10"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="..\services\battery\batteryrepointerface.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="18"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="..\services\battery\batteryrepoimplementation.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos Y="43"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="..\services\battery\batteryserviceinterface.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="20"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit50>
+    </Units>
+    <JumpHistory Count="6" HistoryIndex="5">
+      <Position1>
+        <Filename Value="BatteryDataServer.dpr"/>
+        <Caret Line="26" Column="39" TopLine="7"/>
+      </Position1>
+      <Position2>
+        <Filename Value="server.pas"/>
+        <Caret Line="41" TopLine="25"/>
+      </Position2>
+      <Position3>
+        <Filename Value="BatteryDataServer.dpr"/>
+        <Caret Line="31" TopLine="5"/>
+      </Position3>
+      <Position4>
+        <Filename Value="server.pas"/>
+        <Caret Line="6" Column="2"/>
+      </Position4>
+      <Position5>
+        <Filename Value="server.pas"/>
+        <Caret Line="124" TopLine="111"/>
+      </Position5>
+      <Position6>
+        <Filename Value="server.pas"/>
+        <Caret Line="37" Column="15" TopLine="26"/>
+      </Position6>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

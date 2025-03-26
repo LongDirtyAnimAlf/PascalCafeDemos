@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CONFIG>
-  <Compiler Value="C:\fpcupsystems\embeddednewest\fpc\bin\i386-win32\fpc.exe" Date="1452121707"/>
-  <Params Value=" -Tfreertos -Parm -CpARMV7EM -MObjFPC -Scghi -O2 -l -vewnhibq -FiC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\Clock\lib\arm-freertos -FiC:\fpcupsystems\embeddednewest\ccr\mbf-freertos-don\source -FuC:\fpcupsystems\embeddednewest\ccr\mbf-freertos-don\source -FuC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\Clock\ -FUC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\Clock\lib\arm-freertos\ -FEC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\Clock\bin\ -oC:\Users\superdad\Documents\GitHub\Demos\Embedded\Wio\Clock\bin\ClockTask -Wpwio_terminal -dfreertos_fat -Xu ClockTask.lpr"/>
-</CONFIG>
