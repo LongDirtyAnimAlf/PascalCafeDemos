@@ -339,7 +339,7 @@ implementation
 
 uses
   SysUtils,
-  fpsha256;
+  md5;
 
 function CompareProductCode(const a, b: TCollectionItem): Integer;
 begin
@@ -521,26 +521,13 @@ end;
 
 function TProductDocument.GetHash:ansistring;
 var
-  lSHA256  : fpsha256.TSHA256;
-  S        : TBytes;
   FS:int64;
+  MD5Hash: TMD5Digest;
 begin
-  //FS:=GetFileSize(aPath);
   FS:=GetTickCount64;
-  //FS:=Random(High(Int64));
-
-  lSHA256.Init;
-  S:=TEncoding.UTF8.GetAnsiBytes(fPath);
-  lSHA256.Update(S);
-  S:=TEncoding.UTF8.GetAnsiBytes(InttoStr(FS));
-  lSHA256.Update(S);
-  lSHA256.Final;
-  lSHA256.OutputHexa(result);
-
-  //result:= Int64(Hash32(aPath)) or (Int64(UnixTimeUtc) shl 31);
-  //result := SHA256(FormatUTF8('%'#1'%'#2,[Hash32(aPath),GetFileSize(aPath)]));
+  MD5Hash := MD5String(Format('%s'#1'%d'#2,[fPath,FS]));
+  result := MD5Print(MD5Hash);
 end;
-
 
 procedure TProductDocument.SetPath(aPath:RawUTF8);
 begin
