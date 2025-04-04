@@ -39,6 +39,7 @@ type
     function RetrieveProductImage(const aCode:RawUTF8; out AImage: RawBlob): TStorageResult;
     function RetrieveProducts(out AProducts: TProductCollection): TStorageResult;
     function SaveNewProduct(const AProduct: TProduct): TStorageResult;
+    function UpdateProductCode(const aProductCode:RawUTF8; const NewCode:RawUTF8):TStorageResult;
     function UpdateProduct(const AProduct: TProduct; const Fieldinfo:RawUTF8):TStorageResult;
     function DeleteProduct(const aProductCode:RawUTF8): TStorageResult;
     function ChangedProduct(const aProductCode:RawUTF8; const aVersion:Int64; out Changed:boolean): TStorageResult;
@@ -190,6 +191,23 @@ begin
       fRestOrm.UpdateBlobFields(OrmProduct);
     end;
 
+  finally
+    OrmProduct.Free;
+  end;
+end;
+
+function TProductStorage.UpdateProductCode(const aProductCode:RawUTF8; const NewCode:RawUTF8):TStorageResult;
+var
+  OrmProduct   : TOrmProduct;
+begin
+  Result := stNotFound;
+  OrmProduct := GetProductIDVersionOnly(aProductCode);
+  try
+    if (OrmProduct.IDValue=0) then exit;
+    if FRestOrm.UpdateField(TOrmProduct,OrmProduct.ID,MAINFIELD,NewCode) then
+      Result := stSuccess
+    else
+      Result := stWriteFailure;
   finally
     OrmProduct.Free;
   end;

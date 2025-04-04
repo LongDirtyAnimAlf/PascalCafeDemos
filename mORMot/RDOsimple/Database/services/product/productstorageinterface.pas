@@ -17,6 +17,7 @@ type
     function RetrieveProductImage(const aCode:RawUTF8; out AImage: RawBlob): TStorageResult;
     function RetrieveProducts(out AProducts: TProductCollection): TStorageResult;
     function SaveNewProduct(const AProduct: TProduct): TStorageResult;
+    function UpdateProductCode(const aProductCode:RawUTF8; const NewCode:RawUTF8):TStorageResult;
     function UpdateProduct(const AProduct: TProduct; const Fieldinfo:RawUTF8):TStorageResult;
     function DeleteProduct(const aProductCode:RawUTF8): TStorageResult;
     function ChangedProduct(const aProductCode:RawUTF8; const aVersion:Int64; out Changed:boolean): TStorageResult;

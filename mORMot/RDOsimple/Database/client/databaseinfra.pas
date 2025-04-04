@@ -35,8 +35,8 @@ type
 
     function  GetProduct(var Product: TProduct):boolean;
     function  AddProduct(const Product: TProduct):boolean;
+    function  UpdateProductCode(const Product: TProduct; const NewCode:RawUTF8):boolean;
     function  UpdateProduct(const Product: TProduct; const FieldInfo:RawUTF8):boolean;overload; // FieldInfo can only be a single fieldname or all fields "*"
-    function  UpdateProduct(const Field:variant):boolean;overload;
     function  DeleteProduct(const Product: TProduct):boolean;
     function  ChangedProduct(const Product: TProduct;out Changed:boolean):boolean;
 
@@ -169,12 +169,11 @@ begin
   result:=(ProductService.AddProduct(Product) = seSuccess);
 end;
 
-function TSharedmORMotDDD.UpdateProduct(const Field:variant):boolean;
-var
-  TD           : variant;
+function TSharedmORMotDDD.UpdateProductCode(const Product: TProduct; const NewCode:RawUTF8):boolean;
 begin
   result:=false;
   if (NOT fConnected) then exit;
+  result:=(ProductService.UpdateProductCode(Product.Code,NewCode) = seSuccess);
 end;
 
 function TSharedmORMotDDD.UpdateProduct(const Product: TProduct; const FieldInfo:RawUTF8):boolean;
@@ -194,7 +193,7 @@ begin
   result:=(ProductService.DeleteProduct(Product.ProductCode) = seSuccess);
 end;
 
-function TSharedmORMotDDD.ChangedProduct(const Product: TProduct;out Changed:boolean):boolean;
+function TSharedmORMotDDD.ChangedProduct(const Product: TProduct; out Changed:boolean):boolean;
 begin
   result:=false;
   if (NOT fConnected) then exit;

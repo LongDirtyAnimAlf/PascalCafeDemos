@@ -158,7 +158,7 @@ end;
 
 procedure TProductVisual.GetAll(const aValue:TProduct);
 begin
-  AValue.ProductCode:=Form1.EditProductCode.Text;
+  //AValue.ProductCode:=Form1.EditProductCode.Text;
   AValue.Brand:=Form1.EditBrand.Text;
   AValue.Model:=Form1.EditModel.Text;
 end;
@@ -426,7 +426,10 @@ begin
   begin
     // Product code is something spcial.
     // It is our main search and lookup field.
+    // Must be unique also
     // Changing it requires some special handling
+    if SharedmORMotData.UpdateProductCode(SelectedProduct,EditProductCode.Text) then
+      SelectedProduct.ProductCode:=EditProductCode.Text;
   end
   else
   begin

@@ -319,12 +319,12 @@ object Form1: TForm1
     Height = 664
     Top = 8
     Width = 995
-    ActivePage = tsDetails
+    ActivePage = tsOverview
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Left = 8
     BorderSpacing.Right = 4
     BorderSpacing.Bottom = 8
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 2
     object tsOverview: TTabSheet
       Caption = 'Overview'

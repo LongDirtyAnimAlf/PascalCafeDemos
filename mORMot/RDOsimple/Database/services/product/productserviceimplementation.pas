@@ -24,6 +24,7 @@ type
     function GetProductByCode(const aCode:RawUTF8; out AProduct: TProduct): TServiceResult;
     function GetProductImageByCode(const aCode:RawUTF8; out AImage: RawBlob): TServiceResult;
     function GetAllProducts(out AProducts: TProductCollection): TServiceResult;
+    function UpdateProductCode(const aProductCode:RawUTF8; const NewCode:RawUTF8):TServiceResult;
     function UpdateProduct(const aProductCode:RawUTF8; const FieldData:Variant): TServiceResult;
     function DeleteProduct(const aProductCode:RawUTF8): TServiceResult;
     function ChangedProduct(const aProductCode:RawUTF8; const aVersion:Int64; out Changed:boolean): TServiceResult;
@@ -89,6 +90,14 @@ begin
     Result := seSuccess
   else
     Result := seNotFound;
+end;
+
+function TProductService.UpdateProductCode(const aProductCode:RawUTF8; const NewCode:RawUTF8):TServiceResult;
+begin
+  if fStorage.UpdateProductCode(aProductCode, NewCode) = stSuccess then
+    Result := seSuccess
+  else
+    Result := sePersistenceError;
 end;
 
 function TProductService.UpdateProduct(const aProductCode:RawUTF8; const FieldData:Variant): TServiceResult;
