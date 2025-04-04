@@ -8,7 +8,7 @@
       <Unit0>
         <Filename Value="BatteryDataServer.dpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="4"/>
+        <IsVisibleTab Value="True"/>
         <CursorPos X="6" Y="13"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
@@ -22,7 +22,6 @@
       <Unit2>
         <Filename Value="server.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="110"/>
         <CursorPos X="3" Y="37"/>

@@ -3,8 +3,8 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="12"/>
-    <BuildModes Active="Release"/>
-    <Units Count="436">
+    <BuildModes Active="Debug"/>
+    <Units Count="438">
       <Unit0>
         <Filename Value="BatteryDataClient.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="618"/>
-        <CursorPos X="25" Y="479"/>
+        <TopLine Value="406"/>
+        <CursorPos Y="437"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -29,8 +29,8 @@
         <Filename Value="databaseinfra.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="163"/>
-        <CursorPos X="10" Y="60"/>
+        <TopLine Value="168"/>
+        <CursorPos X="47" Y="187"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -1824,16 +1824,16 @@
       <Unit253>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\orm\mormot.orm.rest.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1051"/>
-        <CursorPos Y="1062"/>
-        <UsageCount Value="18"/>
+        <TopLine Value="1727"/>
+        <CursorPos X="16" Y="1743"/>
+        <UsageCount Value="19"/>
       </Unit253>
       <Unit254>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\orm\mormot.orm.base.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="11352"/>
-        <CursorPos X="9" Y="11366"/>
-        <UsageCount Value="25"/>
+        <TopLine Value="11022"/>
+        <CursorPos X="33" Y="11040"/>
+        <UsageCount Value="26"/>
       </Unit254>
       <Unit255>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot\SQLite3\mORMotUI.pas"/>
@@ -1875,9 +1875,9 @@
         <Filename Value="C:\fpcupsystems\stable324\lazarus\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="2367"/>
-        <CursorPos X="15" Y="2378"/>
-        <UsageCount Value="6"/>
+        <TopLine Value="1593"/>
+        <CursorPos X="29" Y="1610"/>
+        <UsageCount Value="10"/>
       </Unit260>
       <Unit261>
         <Filename Value="C:\fpcupsystems\stable324\lazarus\lcl\lclclasses.pp"/>
@@ -1890,9 +1890,9 @@
       <Unit262>
         <Filename Value="C:\fpcupsystems\stable324\fpcsrc\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="412"/>
-        <CursorPos X="30" Y="426"/>
-        <UsageCount Value="12"/>
+        <TopLine Value="409"/>
+        <CursorPos X="3" Y="426"/>
+        <UsageCount Value="14"/>
       </Unit262>
       <Unit263>
         <Filename Value="..\dom\serviceinterface.pas"/>
@@ -1996,7 +1996,7 @@
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\db\mormot.db.raw.sqlite3.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="5822"/>
-        <CursorPos Y="5836"/>
+        <CursorPos Y="5837"/>
         <UsageCount Value="12"/>
       </Unit277>
       <Unit278>
@@ -2070,9 +2070,9 @@
       <Unit288>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.rtti.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="10557"/>
-        <CursorPos X="23" Y="10571"/>
-        <UsageCount Value="13"/>
+        <TopLine Value="413"/>
+        <CursorPos X="23" Y="440"/>
+        <UsageCount Value="14"/>
       </Unit288>
       <Unit289>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.collections.pas"/>
@@ -2139,9 +2139,9 @@
       <Unit298>
         <Filename Value="C:\fpcupsystems\stable324\fpcsrc\rtl\objpas\classes\collect.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="205"/>
-        <CursorPos X="3" Y="273"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="263"/>
+        <CursorPos X="12" Y="291"/>
+        <UsageCount Value="11"/>
       </Unit298>
       <Unit299>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\orm\mormot.orm.sqlite3.pas"/>
@@ -2251,10 +2251,11 @@
       </Unit313>
       <Unit314>
         <Filename Value="..\services\product\productserviceimplementation.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="18"/>
-        <CursorPos X="19" Y="44"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="105"/>
+        <CursorPos Y="113"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit314>
       <Unit315>
         <Filename Value="..\services\battery\batteryrepointerface.pas"/>
@@ -2360,8 +2361,7 @@
       <Unit330>
         <Filename Value="..\..\Share\documentdom.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="4"/>
-        <CursorPos X="11" Y="9"/>
+        <TopLine Value="67"/>
         <UsageCount Value="35"/>
       </Unit330>
       <Unit331>
@@ -2380,10 +2380,11 @@
       </Unit332>
       <Unit333>
         <Filename Value="..\..\Share\productdom.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="225"/>
-        <CursorPos Y="244"/>
-        <UsageCount Value="50"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="41"/>
+        <CursorPos X="36" Y="17"/>
+        <UsageCount Value="54"/>
+        <Loaded Value="True"/>
       </Unit333>
       <Unit334>
         <Filename Value="C:\fpcupsystems\stable324\lazarus\lcl\comctrls.pp"/>
@@ -3082,147 +3083,165 @@
       </Unit431>
       <Unit432>
         <Filename Value="..\services\product\productinfra.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos Y="64"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="10"/>
+        <CursorPos X="19" Y="36"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit432>
       <Unit433>
         <Filename Value="..\services\product\productserviceinterface.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="145"/>
-        <CursorPos Y="172"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="35" Y="169"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit433>
       <Unit434>
         <Filename Value="..\services\product\productstorageimplementation.pas"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="20"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="12"/>
+        <CursorPos Y="83"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit434>
       <Unit435>
         <Filename Value="..\services\product\productstorageinterface.pas"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="14"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="14" Y="20"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit435>
+      <Unit436>
+        <Filename Value="C:\fpcupsystems\stable324\fpcsrc\packages\fcl-hash\src\fpsha256.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="49"/>
+        <UsageCount Value="10"/>
+      </Unit436>
+      <Unit437>
+        <Filename Value="C:\fpcupsystems\stable324\fpcsrc\packages\hash\src\md5.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="149"/>
+        <CursorPos X="10" Y="169"/>
+        <UsageCount Value="10"/>
+      </Unit437>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="460" TopLine="445"/>
+        <Filename Value="..\services\product\productserviceinterface.pas"/>
+        <Caret Line="27" Column="23" TopLine="11"/>
       </Position1>
       <Position2>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="96" TopLine="74"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="183" Column="18" TopLine="169"/>
       </Position2>
       <Position3>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="217" Column="50" TopLine="203"/>
+        <Filename Value="..\services\product\productserviceinterface.pas"/>
+        <Caret Line="28" Column="20" TopLine="11"/>
       </Position3>
       <Position4>
         <Filename Value="mainclientgui.pas"/>
-        <Caret Line="82" Column="24" TopLine="66"/>
+        <Caret Line="430" TopLine="411"/>
       </Position4>
       <Position5>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="558" TopLine="549"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="172" Column="33" TopLine="163"/>
       </Position5>
       <Position6>
         <Filename Value="mainclientgui.pas"/>
-        <Caret Line="558" TopLine="549"/>
+        <Caret Line="425" Column="5" TopLine="411"/>
       </Position6>
       <Position7>
         <Filename Value="mainclientgui.pas"/>
-        <Caret Line="13" Column="5"/>
+        <Caret Line="430" TopLine="411"/>
       </Position7>
       <Position8>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="401" Column="22" TopLine="384"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="175" TopLine="158"/>
       </Position8>
       <Position9>
         <Filename Value="mainclientgui.pas"/>
-        <Caret Line="12"/>
+        <Caret Line="432" TopLine="411"/>
       </Position9>
       <Position10>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="150" Column="28" TopLine="143"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="183" TopLine="158"/>
       </Position10>
       <Position11>
-        <Filename Value="mainclientgui.pas"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="184" TopLine="158"/>
       </Position11>
       <Position12>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="76" Column="36" TopLine="50"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="185" TopLine="158"/>
       </Position12>
       <Position13>
-        <Filename Value="mainclientgui.pas"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="186" TopLine="158"/>
       </Position13>
       <Position14>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="522" Column="43" TopLine="489"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="187" TopLine="159"/>
       </Position14>
       <Position15>
-        <Filename Value="mainclientgui.pas"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="94" TopLine="77"/>
       </Position15>
       <Position16>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="83" Column="34" TopLine="56"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="99" TopLine="86"/>
       </Position16>
       <Position17>
-        <Filename Value="mainclientgui.pas"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="100" TopLine="86"/>
       </Position17>
       <Position18>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="78" Column="26" TopLine="56"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="102" TopLine="86"/>
       </Position18>
       <Position19>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="85" Column="36" TopLine="58"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="104" TopLine="86"/>
       </Position19>
       <Position20>
-        <Filename Value="mainclientgui.pas"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="106" TopLine="86"/>
       </Position20>
       <Position21>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="85" Column="36" TopLine="58"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="107" TopLine="86"/>
       </Position21>
       <Position22>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="391" Column="69" TopLine="363"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="108" TopLine="86"/>
       </Position22>
       <Position23>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="192" Column="45" TopLine="174"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="109" TopLine="86"/>
       </Position23>
       <Position24>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="417" Column="25" TopLine="397"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="110" TopLine="92"/>
       </Position24>
       <Position25>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="531" Column="39" TopLine="436"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="112" TopLine="92"/>
       </Position25>
       <Position26>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="496" Column="18" TopLine="491"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="113" TopLine="92"/>
       </Position26>
       <Position27>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="74" Column="26" TopLine="58"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="187" TopLine="159"/>
       </Position27>
       <Position28>
-        <Filename Value="mainclientgui.pas"/>
-        <Caret Line="479" Column="25" TopLine="474"/>
+        <Filename Value="databaseinfra.pas"/>
+        <Caret Line="187" Column="3" TopLine="168"/>
       </Position28>
       <Position29>
-        <Filename Value="databaseinfra.pas"/>
-        <Caret Line="31" Column="22"/>
+        <Filename Value="mainclientgui.pas"/>
+        <Caret Line="425" Column="3" TopLine="415"/>
       </Position29>
-      <Position30>
-        <Filename Value="databaseinfra.pas"/>
-        <Caret Line="81" Column="3" TopLine="79"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

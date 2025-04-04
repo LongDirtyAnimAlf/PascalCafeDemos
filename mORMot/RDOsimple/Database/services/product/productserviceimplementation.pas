@@ -47,7 +47,7 @@ end;
 
 function TProductService.AddProduct(const AProduct: TProduct): TServiceResult;
 begin
-  if (AProduct.B_code = '') then
+  if (AProduct.ProductCode = '') then
   begin
     Result := seMissingField;
     exit;
@@ -68,7 +68,7 @@ end;
 
 function TProductService.GetProductByCode(const aCode:RawUTF8; out AProduct: TProduct): TServiceResult;
 begin
-  AProduct.B_code:=aCode;
+  AProduct.ProductCode:=aCode;
   if fStorage.RetrieveProduct(AProduct) = stSuccess then
     Result := seSuccess
   else
@@ -105,7 +105,7 @@ begin
 
   LocalProduct := TProduct.Create(nil);
   try
-    LocalProduct.B_code:=aProductCode;
+    LocalProduct.ProductCode:=aProductCode;
     Valid := DocVariantToObject(_Safe(FieldData)^,LocalProduct);
     if Valid then
     begin

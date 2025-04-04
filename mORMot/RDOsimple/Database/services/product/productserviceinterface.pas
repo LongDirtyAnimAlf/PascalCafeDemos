@@ -77,6 +77,8 @@ begin
               pa^.GetValueVariant(AObject,TVarData(TD2), @JSON_[mDefault]);
               // Add requested fieldname and fielddata
               TDocVariantData(TD).AddValue(pa^.Name,TD2);
+              // Prevent memory leak
+              TDocVariantData(TD2).Clear;
             end;
           end;
         end;
@@ -94,6 +96,8 @@ begin
         pa^.GetValueVariant(AObject,TVarData(TD2), @JSON_[mDefault]);
         // Add requested fieldname and fielddata
         TDocVariantData(TD).AddValue(FieldInfo,TD2);
+        // Prevent memory leak
+        TDocVariantData(TD2).Clear;
       end;
     end;
 
@@ -146,6 +150,8 @@ begin
               pa^.GetValueVariant(Product,TVarData(TD2), @JSON_[mDefault]);
               // Add requested fieldname and fielddata
               TDocVariantData(TD).AddValue(pa^.Name,TD2);
+              // Prevent memory leak
+              TDocVariantData(TD2).Clear;
             end;
           end;
         end;
@@ -163,6 +169,8 @@ begin
         pa^.GetValueVariant(Product,TVarData(TD2), @JSON_[mDefault]);
         // Add requested fieldname and fielddata
         TDocVariantData(TD).AddValue(FieldInfo,TD2);
+        // Prevent memory leak
+        TDocVariantData(TD2).Clear;
       end;
     end;
 

@@ -82,11 +82,6 @@ begin
   inherited Create;
 
   fMap.Init(TOrmProduct, TProduct).AutoMap;
-  fMap.Map([
-    'ProductCode'      ,'B_code',
-    'Brand'            ,'B_name',
-    'Model'            ,'B_type'
-    ]);
 end;
 
 destructor TProductStorage.Destroy;
@@ -221,7 +216,8 @@ begin
       begin
         // Update some fields
         fMap.ToA(OrmProduct,AProduct);
-        if FRestOrm.Update(OrmProduct,Fieldinfo) then
+        if FRestOrm.Update
+        (OrmProduct,Fieldinfo) then
           Result := stSuccess;
       end;
     end;

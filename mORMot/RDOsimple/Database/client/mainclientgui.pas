@@ -23,19 +23,25 @@ type
     procedure GetAll(const aValue:TProduct);
   end;
 
+  { Define an observer }
+  (*
+  TMyObserver = class(TInterfacedObject, IFPObserver)
+  public
+    procedure FPOObservedChanged(ASender: TObject; Operation: TFPObservedOperation; Data: Pointer);
+  end;
+  *)
+
   { TForm1 }
 
   TForm1 = class(TForm)
     btnConnect: TButton;
-    btnImportData: TButton;
+    btnAddProduct: TButton;
     DetailImage2: TImage;
     DetailImage3: TImage;
     DetailImage4: TImage;
     EditBrand: TEdit;
-    EditEAN: TEdit;
     EditModel: TEdit;
     EditProductCode: TEdit;
-    EditProject: TEdit;
     FrontImage: TImage;
     BackImage: TImage;
     EmptyImage: TImage;
@@ -44,6 +50,7 @@ type
     ImageList1: TImageList;
     ImageListDocument: TImageList;
     ListViewProductDocs: TListView;
+    Memo1: TMemo;
     ProductDrawGrid: TDrawGrid;
     MemoParticularities: TMemo;
     memoRemarks: TMemo;
@@ -57,6 +64,8 @@ type
     tsAdmin: TTabSheet;
     tsOverview: TTabSheet;
     tsImages: TTabSheet;
+    procedure btnAddProductClick(Sender: TObject);
+    procedure FieldEditingDone(Sender: TObject);
     procedure ProductDrawGridHeaderClick(Sender: TObject; IsColumn: Boolean;
       Index: Integer);
     procedure btnConnectClick({%H-}Sender: TObject);
@@ -142,16 +151,16 @@ end;
 
 procedure TProductVisual.SetAll(const aValue:TProduct);
 begin
-  Form1.EditProductCode.Text:=AValue.B_code;
-  Form1.EditBrand.Text:=AValue.B_name;
-  Form1.EditModel.Text:=AValue.B_type;
+  Form1.EditProductCode.Text:=AValue.ProductCode;
+  Form1.EditBrand.Text:=AValue.Brand;
+  Form1.EditModel.Text:=AValue.Model;
 end;
 
 procedure TProductVisual.GetAll(const aValue:TProduct);
 begin
-  AValue.B_code:=Form1.EditProductCode.Text;
-  AValue.B_name:=Form1.EditBrand.Text;
-  AValue.B_type:=Form1.EditModel.Text;
+  AValue.ProductCode:=Form1.EditProductCode.Text;
+  AValue.Brand:=Form1.EditBrand.Text;
+  AValue.Model:=Form1.EditModel.Text;
 end;
 
 { TForm1 }
@@ -161,6 +170,14 @@ var
   i:integer;
 begin
   Products:=TProductCollection.Create;
+
+  (*
+  // Create observer
+  MyObserver := TMyObserver.Create;
+  // Attach observer to collection (TPersistent handles this)
+  Products.FPOAttachObserver(MyObserver);
+  *)
+
   SharedmORMotData := TSharedmORMotDDD.Create;
 
   SelectedProduct:=nil;
@@ -195,7 +212,7 @@ begin
   ListViewProductDocs.Clear;
 
   tsAdmin.TabVisible:=True;
-  Self.AllowDropFiles:=True;
+  AllowDropFiles:=True;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -391,6 +408,34 @@ begin
   if PopUp.PopupComponent=ProductDrawGrid then DeleteSelectedProduct;
 end;
 
+procedure TForm1.btnAddProductClick(Sender: TObject);
+var
+  LocalProduct : TProduct;
+begin
+  if Products.AddOrUpdate('NewProduct',true,LocalProduct) then
+  begin
+    //GetDataFromGridRow(nil,1);
+    SharedmORMotData.AddProduct(LocalProduct);
+  end;
+  RefreshGUI;
+end;
+
+procedure TForm1.FieldEditingDone(Sender: TObject);
+begin
+  if (Sender=EditProductCode) then
+  begin
+    // Product code is something spcial.
+    // It is our main search and lookup field.
+    // Changing it requires some special handling
+  end
+  else
+  begin
+    ProductVisual.GetAll(SelectedProduct);
+    SharedmORMotData.UpdateProduct(SelectedProduct,'*');
+  end;
+  RefreshGUI;
+end;
+
 procedure TForm1.ProductDrawGridHeaderClick(Sender: TObject; IsColumn: Boolean;
   Index: Integer);
 begin
@@ -425,7 +470,7 @@ begin
   aDrawGrid:=TDrawGrid(Sender);
 
   LocalProduct:=nil;
-  if Sender=ProductDrawGrid then LocalProduct:=Products.GetBatteryData(aRow);
+  if Sender=ProductDrawGrid then LocalProduct:=Products.GetProductData(aRow);
 
   if (aRow>0) then
   begin
@@ -440,9 +485,9 @@ begin
         else
         begin
           case aCol of
-            0: s:=LocalProduct.B_code;
-            1: s:=LocalProduct.B_name;
-            2: s:=LocalProduct.B_type;
+            0: s:=LocalProduct.ProductCode;
+            1: s:=LocalProduct.Brand;
+            2: s:=LocalProduct.Model;
           end;
           InflateRect(ARect, -constCellpadding, -constCellPadding);
           aDrawGrid.Canvas.TextRect(ARect, ARect.Left, ARect.Top, s);
@@ -557,7 +602,7 @@ begin
   if Sender=ProductDrawGrid then
   begin
 
-    SelectedProduct:=Products.GetBatteryData(ARowIndex);
+    SelectedProduct:=Products.GetProductData(ARowIndex);
 
     if Assigned(SelectedProduct) then
     begin
@@ -646,6 +691,24 @@ begin
   ProductDrawGrid.Invalidate;
   if Products.Count>0 then GetDataFromGridRow(ProductDrawGrid,ProductDrawGrid.Row);
 end;
+
+(*
+procedure TMyObserver.FPOObservedChanged(ASender: TObject; Operation: TFPObservedOperation; Data: Pointer);
+begin
+  case Operation of
+    ooAddItem:
+      Form1.Memo1.Append('Item added');
+    ooDeleteItem:
+      Form1.Memo1.Append('Item removed');
+    ooChange:
+      Form1.Memo1.Append('Collection changed');
+    ooFree:
+      Form1.Memo1.Append('Item free');
+    ooCustom:
+      Form1.Memo1.Append('Item custom');
+  end;
+end;
+*)
 
 end.
 

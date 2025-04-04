@@ -48,9 +48,9 @@ type
 
   TProduct = class(TCollectionItem)
   strict private
-    fB_code            : RawUTF8;
-    fB_name            : RawUTF8;
-    fB_type            : RawUTF8;
+    fProductCode       : RawUTF8;
+    fBrand             : RawUTF8;
+    fModel             : RawUTF8;
     fDocuments         : TProductDocumentCollection;
     fThumb             : TBlobber;
     fVersion           : Int64;
@@ -58,11 +58,11 @@ type
     constructor Create(ACollection: TCollection); override;
     destructor Destroy; override;
     procedure Init;
-    property Code              : RawUTF8 read fB_code;
+    property Code              : RawUTF8 read fProductCode;
   published
-    property B_code            : RawUTF8 read fB_code write fB_code;
-    property B_name            : RawUTF8 read fB_name write fB_name;
-    property B_type            : RawUTF8 read fB_type write fB_type;
+    property ProductCode       : RawUTF8 read fProductCode write fProductCode;
+    property Brand             : RawUTF8 read fBrand write fBrand;
+    property Model             : RawUTF8 read fModel write fModel;
     property Documents         : TProductDocumentCollection read fDocuments write fDocuments;
     property Thumb             : TBlobber read fThumb write fThumb;
     property Version           : Int64 read fVersion write fVersion;
@@ -78,7 +78,7 @@ type
     Compare: TCollectionSortCompare;
     constructor Create;overload;
     property Item[Index: integer]: TProduct read GetItem;
-    function GetBatteryData(BatteryIndex:integer):TProduct;
+    function GetProductData(ProductIndex:integer):TProduct;
     function Add: TProduct;
     function AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aBattery:TProduct): boolean;
   end;
@@ -96,16 +96,16 @@ function CompareProductCode(const a, b: TCollectionItem): Integer;
 begin
   if (a = nil) or (b = nil) or (not (a is TProduct)) or (not (b is TProduct)) then
     raise Exception.Create('Invalid TProduct reference.');
-  result:=SysUtils.StrComp(PChar(pointer(TProduct(a).B_code)),PChar(pointer(TProduct(b).B_code)));
+  result:=SysUtils.StrComp(PChar(pointer(TProduct(a).ProductCode)),PChar(pointer(TProduct(b).ProductCode)));
  end;
 
 function CompareProductName(const a, b: TCollectionItem): Integer;
 begin
   if (a = nil) or (b = nil) or (not (a is TProduct)) or (not (b is TProduct)) then
     raise Exception.Create('Invalid TProduct reference.');
-  result:=SysUtils.StrComp(PChar(pointer(TProduct(a).B_name)),PChar(pointer(TProduct(b).B_name)));
+  result:=SysUtils.StrComp(PChar(pointer(TProduct(a).Brand)),PChar(pointer(TProduct(b).Brand)));
   if result=0 then
-    result:=SysUtils.StrComp(PChar(pointer(TProduct(a).B_type)),PChar(pointer(TProduct(b).B_type)));
+    result:=SysUtils.StrComp(PChar(pointer(TProduct(a).Model)),PChar(pointer(TProduct(b).Model)));
 end;
 
 { TProductDocument }
@@ -197,9 +197,9 @@ end;
 
 procedure TProduct.Init;
 begin
-  B_code            := 'Undefined';
-  B_name            := '';
-  B_type            := '';
+  ProductCode            := 'Undefined';
+  Brand            := '';
+  Model            := '';
 end;
 
 { TProductCollection }
@@ -221,12 +221,12 @@ begin
   inherited;
 end;
 
-function TProductCollection.GetBatteryData(BatteryIndex:integer):TProduct;
+function TProductCollection.GetProductData(ProductIndex:integer):TProduct;
 begin
   result:=nil;
-  if ((BatteryIndex<=Count) AND (BatteryIndex>0)) then
+  if ((ProductIndex<=Count) AND (ProductIndex>0)) then
   begin
-    result:=Item[BatteryIndex-1];
+    result:=Item[ProductIndex-1];
   end;
 end;
 
@@ -243,7 +243,7 @@ begin
   aBattery:=nil;
   for TCollectionItem(BatteryRunner) in Self do
   begin
-    if (BatteryRunner.B_code=ABC) then
+    if (BatteryRunner.ProductCode=ABC) then
     begin
       aBattery:=BatteryRunner;
       result:=false;
@@ -253,7 +253,7 @@ begin
   if NOT Assigned(aBattery) then if AddIfNotFound then
   begin
     aBattery := Add;
-    aBattery.B_code:=ABC;
+    aBattery.ProductCode:=ABC;
   end;
 end;
 

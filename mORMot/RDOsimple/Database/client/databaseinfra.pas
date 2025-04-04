@@ -35,7 +35,8 @@ type
 
     function  GetProduct(var Product: TProduct):boolean;
     function  AddProduct(const Product: TProduct):boolean;
-    function  UpdateProduct(const Product: TProduct; const Fieldinfo:RawUTF8):boolean;
+    function  UpdateProduct(const Product: TProduct; const FieldInfo:RawUTF8):boolean;overload; // FieldInfo can only be a single fieldname or all fields "*"
+    function  UpdateProduct(const Field:variant):boolean;overload;
     function  DeleteProduct(const Product: TProduct):boolean;
     function  ChangedProduct(const Product: TProduct;out Changed:boolean):boolean;
 
@@ -168,13 +169,21 @@ begin
   result:=(ProductService.AddProduct(Product) = seSuccess);
 end;
 
-function TSharedmORMotDDD.UpdateProduct(const Product: TProduct; const Fieldinfo:RawUTF8):boolean;
+function TSharedmORMotDDD.UpdateProduct(const Field:variant):boolean;
 var
   TD           : variant;
 begin
   result:=false;
   if (NOT fConnected) then exit;
-  if ProductFieldsToVariant(Product,Fieldinfo,TD) then
+end;
+
+function TSharedmORMotDDD.UpdateProduct(const Product: TProduct; const FieldInfo:RawUTF8):boolean;
+var
+  TD           : variant;
+begin
+  result:=false;
+  if (NOT fConnected) then exit;
+  if ProductFieldsToVariant(Product,FieldInfo,TD) then
     result:=(ProductService.UpdateProduct(Product.Code,TD) = seSuccess);
 end;
 
@@ -182,14 +191,14 @@ function TSharedmORMotDDD.DeleteProduct(const Product: TProduct):boolean;
 begin
   result:=false;
   if (NOT fConnected) then exit;
-  result:=(ProductService.DeleteProduct(Product.B_code) = seSuccess);
+  result:=(ProductService.DeleteProduct(Product.ProductCode) = seSuccess);
 end;
 
 function TSharedmORMotDDD.ChangedProduct(const Product: TProduct;out Changed:boolean):boolean;
 begin
   result:=false;
   if (NOT fConnected) then exit;
-  result:=(ProductService.ChangedProduct(Product.B_code,Product.Version,Changed) = seSuccess);
+  result:=(ProductService.ChangedProduct(Product.ProductCode,Product.Version,Changed) = seSuccess);
 end;
 
 function TSharedmORMotDDD.GetDocuments(const Product: TProduct; var ADocuments: TDocumentCollection):boolean;
@@ -255,7 +264,7 @@ begin
     Document:=TDocument.Create(nil);
     try
       Document.SetPath(AProductDocument.Path,True);
-      Document.ProductCode:=LocalProduct.B_code;
+      Document.ProductCode:=LocalProduct.ProductCode;
       Document.Hash:=AProductDocument.Hash;
       result:=(DocumentService.AddDocument(Document) = seSuccess);
       if result then
