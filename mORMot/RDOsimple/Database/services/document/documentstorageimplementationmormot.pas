@@ -60,8 +60,7 @@ begin
     fRestServerDB:=TRestServerDB.Create(TOrmModel.Create([TOrmDocument]), DOCUMENT_DATABASE_FILENAME);
     fRestServerDB.Model.Owner:=fRestServerDB;
     fRestServerDB.Server.CreateMissingTables;
-    fRestServerDB.CreateSqlMultiIndex(TOrmDocument,['Hash'],true);
-
+    fRestServerDB.Server.CreateSqlMultiIndex(TOrmDocument,['Hash'],true);
     fRestOrm:=fRestServerDB.OrmInstance;
   end
   else

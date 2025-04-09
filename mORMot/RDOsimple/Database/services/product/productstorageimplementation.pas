@@ -70,8 +70,8 @@ begin
     fRestServerDB := TRestServerDB.Create(TOrmModel.Create([TOrmProduct]), aDBFile);
     fRestServerDB.Model.Owner:=fRestServerDB;
     fRestServerDB.Server.CreateMissingTables;
-    fRestServerDB.CreateSqlMultiIndex(TOrmProduct,[MAINFIELD],true);
-    fRestServerDB.CreateSqlMultiIndex(TOrmProduct,['Brand','Model'],false);
+    fRestServerDB.Server.CreateSqlMultiIndex(TOrmProduct,[MAINFIELD],true);
+    fRestServerDB.Server.CreateSqlMultiIndex(TOrmProduct,['Brand','Model'],false);
     fRestOrm:=fRestServerDB.OrmInstance;
   end
   else
