@@ -34,8 +34,9 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
-    btnConnect: TButton;
+    btnConnectLocal: TButton;
     btnAddProduct: TButton;
+    btnConnectRemote: TButton;
     DetailImage2: TImage;
     DetailImage3: TImage;
     DetailImage4: TImage;
@@ -50,7 +51,6 @@ type
     ImageList1: TImageList;
     ImageListDocument: TImageList;
     ListViewProductDocs: TListView;
-    Memo1: TMemo;
     ProductDrawGrid: TDrawGrid;
     MemoParticularities: TMemo;
     memoRemarks: TMemo;
@@ -68,7 +68,7 @@ type
     procedure FieldEditingDone(Sender: TObject);
     procedure ProductDrawGridHeaderClick(Sender: TObject; IsColumn: Boolean;
       Index: Integer);
-    procedure btnConnectClick({%H-}Sender: TObject);
+    procedure btnConnectLocalClick({%H-}Sender: TObject);
     procedure btnDeleteTypeClick({%H-}Sender: TObject);
     procedure editKeyPressFloatOnly(Sender: TObject; var Key: char);
     procedure FormCreate({%H-}Sender: TObject);
@@ -79,8 +79,6 @@ type
   private
     ProductVisual       : TProductVisual;
     DataBusy            : integer;
-
-    procedure ConnectWithServer;
 
     procedure ProductGridSelectCell(Sender: TObject; ACol, ARow: Longint; var CanSelect: Boolean);
     procedure ProductGridAfterSelection(Sender: TObject; aCol,aRow: Integer);
@@ -520,30 +518,28 @@ begin
   end;
 end;
 
-procedure TForm1.ConnectWithServer;
+procedure TForm1.btnConnectLocalClick(Sender: TObject);
 var
   ServerOk:boolean;
 begin
-  SharedmORMotData.ConnectNew({remote:}False,{ownserver:}True);
-
   ServerOk:=SharedmORMotData.Connected;
-  if NOT ServerOk then
+  if ServerOk then
   begin
-    ShowMessage('Could not connect with online server.');
-  end
-  else
-  begin
+    ShowMessage('Already connected !');
+    exit;
   end;
-end;
 
-procedure TForm1.btnConnectClick(Sender: TObject);
-begin
   TButton(Sender).Enabled:=False;
-
   try
-    ConnectWithServer;
+    if Sender=btnConnectLocal then SharedmORMotData.ConnectNew({remote:}False,{ownserver:}True);
+    if Sender=btnConnectRemote then SharedmORMotData.ConnectNew({remote:}True,{ownserver:}False);
 
-    if SharedmORMotData.Connected then
+    ServerOk:=SharedmORMotData.Connected;
+    if (NOT ServerOk) then
+    begin
+      ShowMessage('Could not connect with server.');
+    end
+    else
     begin
       // Get the Products from the database
       SharedmORMotData.GetProductTable(Products);
@@ -556,7 +552,6 @@ begin
       // Select first available sample, if any
       if Products.Count>0 then GetDataFromGridRow(ProductDrawGrid,1);
     end;
-
   finally
     TButton(Sender).Enabled:=True;
   end;

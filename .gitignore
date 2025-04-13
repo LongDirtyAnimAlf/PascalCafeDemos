@@ -42,6 +42,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+*.lps
 *.ppu
 *.o
 *.obj
@@ -113,7 +114,11 @@ lib/
 bin/
 
 libs/
-bins/
+# bins/
+# !bins/**/*.db3
+
+/bins/**/*
+!/bins/**/*.db3
 
 .generated_files/
 _ext/

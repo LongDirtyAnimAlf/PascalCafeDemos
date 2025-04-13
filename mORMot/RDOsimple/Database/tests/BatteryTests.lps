@@ -7,19 +7,16 @@
       <Unit0>
         <Filename Value="BatteryTests.dpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="45"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
         <CursorPos X="13" Y="59"/>
         <UsageCount Value="110"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
       <Unit1>
         <Filename Value="tests.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="64"/>
-        <CursorPos X="24" Y="74"/>
         <UsageCount Value="110"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -717,9 +714,7 @@
       </Unit125>
       <Unit126>
         <Filename Value="..\server\server.pas"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="53"/>
-        <CursorPos X="10" Y="66"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1311,11 +1306,10 @@
       </Unit205>
       <Unit206>
         <Filename Value="..\services\rundata\rundataserviceinterface.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="2"/>
         <CursorPos X="14" Y="16"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit206>
       <Unit207>
@@ -1364,11 +1358,10 @@
       </Unit212>
       <Unit213>
         <Filename Value="..\..\Share\rundatadom.pas"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="418"/>
         <CursorPos X="3" Y="422"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit213>
       <Unit214>
@@ -1388,11 +1381,10 @@
       </Unit215>
       <Unit216>
         <Filename Value="..\services\rundata\rundatastorageimplementation.pas"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="61"/>
         <CursorPos X="23" Y="74"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit216>
       <Unit217>
@@ -1441,11 +1433,10 @@
       </Unit222>
       <Unit223>
         <Filename Value="..\services\rundata\rundatainfra.pas"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="70"/>
         <CursorPos Y="97"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit223>
       <Unit224>
@@ -1466,9 +1457,7 @@
       </Unit225>
       <Unit226>
         <Filename Value="..\client\databaseinfra.pas"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="137"/>
-        <CursorPos Y="113"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1516,9 +1505,9 @@
       </Unit231>
       <Unit232>
         <Filename Value="..\..\Share\productdom.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="238"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit232>
       <Unit233>
@@ -1538,9 +1527,7 @@
       </Unit234>
       <Unit235>
         <Filename Value="..\client\client.pas"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="33"/>
-        <CursorPos X="10" Y="23"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1549,123 +1536,120 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="tests.pas"/>
-        <Caret Line="569" Column="12" TopLine="563"/>
+        <Caret Line="512" Column="40" TopLine="496"/>
       </Position1>
       <Position2>
         <Filename Value="tests.pas"/>
-        <Caret Line="431" Column="17" TopLine="419"/>
+        <Caret Line="513" Column="28" TopLine="497"/>
       </Position2>
       <Position3>
         <Filename Value="tests.pas"/>
-        <Caret Line="55" Column="144" TopLine="48"/>
+        <Caret Line="533" Column="40" TopLine="517"/>
       </Position3>
       <Position4>
         <Filename Value="tests.pas"/>
-        <Caret Line="108" Column="13" TopLine="91"/>
+        <Caret Line="534" Column="28" TopLine="518"/>
       </Position4>
       <Position5>
         <Filename Value="tests.pas"/>
-        <Caret Line="110" Column="10" TopLine="93"/>
+        <Caret Line="34" Column="12" TopLine="22"/>
       </Position5>
       <Position6>
         <Filename Value="tests.pas"/>
-        <Caret Line="118" Column="10" TopLine="101"/>
+        <Caret Line="278" Column="34" TopLine="262"/>
       </Position6>
       <Position7>
         <Filename Value="tests.pas"/>
-        <Caret Line="535" Column="31" TopLine="521"/>
+        <Caret Line="285" Column="58" TopLine="269"/>
       </Position7>
       <Position8>
         <Filename Value="tests.pas"/>
-        <Caret Line="436" TopLine="425"/>
+        <Caret Line="300" Column="58" TopLine="284"/>
       </Position8>
       <Position9>
         <Filename Value="tests.pas"/>
-        <Caret Line="33" Column="8" TopLine="23"/>
+        <Caret Line="341" Column="62" TopLine="325"/>
       </Position9>
       <Position10>
         <Filename Value="tests.pas"/>
-        <Caret Line="241" TopLine="224"/>
+        <Caret Line="474" Column="34" TopLine="458"/>
       </Position10>
       <Position11>
         <Filename Value="tests.pas"/>
-        <Caret Line="272" Column="28" TopLine="256"/>
+        <Caret Line="481" Column="58" TopLine="465"/>
       </Position11>
       <Position12>
         <Filename Value="tests.pas"/>
-        <Caret Line="316" Column="40" TopLine="300"/>
+        <Caret Line="496" Column="58" TopLine="480"/>
       </Position12>
       <Position13>
         <Filename Value="tests.pas"/>
-        <Caret Line="317" Column="28" TopLine="301"/>
+        <Caret Line="537" Column="62" TopLine="521"/>
       </Position13>
       <Position14>
         <Filename Value="tests.pas"/>
-        <Caret Line="337" Column="40" TopLine="321"/>
+        <Caret Line="33" Column="18" TopLine="23"/>
       </Position14>
       <Position15>
         <Filename Value="tests.pas"/>
-        <Caret Line="338" Column="28" TopLine="322"/>
+        <Caret Line="74" Column="24" TopLine="64"/>
       </Position15>
       <Position16>
         <Filename Value="tests.pas"/>
-        <Caret Line="468" Column="28" TopLine="452"/>
+        <Caret Line="114" Column="21" TopLine="98"/>
       </Position16>
       <Position17>
         <Filename Value="tests.pas"/>
-        <Caret Line="512" Column="40" TopLine="496"/>
       </Position17>
       <Position18>
         <Filename Value="tests.pas"/>
-        <Caret Line="513" Column="28" TopLine="497"/>
+        <Caret Line="548" Column="46" TopLine="522"/>
       </Position18>
       <Position19>
         <Filename Value="tests.pas"/>
-        <Caret Line="533" Column="40" TopLine="517"/>
+        <Caret Line="114" Column="16" TopLine="99"/>
       </Position19>
       <Position20>
         <Filename Value="tests.pas"/>
-        <Caret Line="534" Column="28" TopLine="518"/>
       </Position20>
       <Position21>
         <Filename Value="tests.pas"/>
-        <Caret Line="34" Column="12" TopLine="22"/>
+        <Caret Line="535" Column="51" TopLine="522"/>
       </Position21>
       <Position22>
         <Filename Value="tests.pas"/>
-        <Caret Line="278" Column="34" TopLine="262"/>
+        <Caret Line="131" TopLine="102"/>
       </Position22>
       <Position23>
         <Filename Value="tests.pas"/>
-        <Caret Line="285" Column="58" TopLine="269"/>
+        <Caret Line="142" TopLine="127"/>
       </Position23>
       <Position24>
         <Filename Value="tests.pas"/>
-        <Caret Line="300" Column="58" TopLine="284"/>
+        <Caret Line="176" TopLine="169"/>
       </Position24>
       <Position25>
         <Filename Value="tests.pas"/>
-        <Caret Line="341" Column="62" TopLine="325"/>
+        <Caret Line="253" Column="8" TopLine="251"/>
       </Position25>
       <Position26>
-        <Filename Value="tests.pas"/>
-        <Caret Line="474" Column="34" TopLine="458"/>
+        <Filename Value="..\..\Share\productdom.pas"/>
+        <Caret Line="63" Column="25" TopLine="45"/>
       </Position26>
       <Position27>
-        <Filename Value="tests.pas"/>
-        <Caret Line="481" Column="58" TopLine="465"/>
+        <Filename Value="..\client\databaseinfra.pas"/>
+        <Caret Line="113" TopLine="137"/>
       </Position27>
       <Position28>
-        <Filename Value="tests.pas"/>
-        <Caret Line="496" Column="58" TopLine="480"/>
+        <Filename Value="..\server\server.pas"/>
+        <Caret Line="66" Column="10" TopLine="53"/>
       </Position28>
       <Position29>
-        <Filename Value="tests.pas"/>
-        <Caret Line="537" Column="62" TopLine="521"/>
+        <Filename Value="..\client\client.pas"/>
+        <Caret Line="23" Column="10" TopLine="33"/>
       </Position29>
       <Position30>
         <Filename Value="tests.pas"/>
-        <Caret Line="33" Column="18" TopLine="23"/>
       </Position30>
     </JumpHistory>
     <RunParams>

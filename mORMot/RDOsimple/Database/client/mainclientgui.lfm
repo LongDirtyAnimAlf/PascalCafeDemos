@@ -10,7 +10,7 @@ object Form1: TForm1
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
   LCLVersion = '3.2.0.0'
-  object btnConnect: TButton
+  object btnConnectLocal: TButton
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = ProductDrawGrid
@@ -21,19 +21,19 @@ object Form1: TForm1
     Width = 416
     BorderSpacing.Left = 8
     BorderSpacing.Top = 8
-    Caption = 'Connect with database'
+    Caption = 'Connect with local database'
     TabOrder = 0
-    OnClick = btnConnectClick
+    OnClick = btnConnectLocalClick
   end
   object ProductDrawGrid: TDrawGrid
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = btnConnect
+    AnchorSideTop.Control = btnConnectRemote
     AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = btnConnect
+    AnchorSideRight.Control = btnConnectLocal
     AnchorSideRight.Side = asrBottom
     Left = 8
     Height = 267
-    Top = 53
+    Top = 98
     Width = 416
     AlternateColor = clBtnFace
     Anchors = [akTop, akLeft, akRight]
@@ -310,7 +310,7 @@ object Form1: TForm1
   object PageControl1: TPageControl
     AnchorSideLeft.Control = ProductDrawGrid
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = btnConnect
+    AnchorSideTop.Control = btnConnectLocal
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
@@ -1900,15 +1900,21 @@ object Form1: TForm1
       end
     end
   end
-  object Memo1: TMemo
-    Left = 24
-    Height = 290
-    Top = 360
-    Width = 376
-    Lines.Strings = (
-      'Memo1'
-    )
+  object btnConnectRemote: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = btnConnectLocal
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = ProductDrawGrid
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 37
+    Top = 53
+    Width = 416
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Connect with remote database'
     TabOrder = 3
+    OnClick = btnConnectLocalClick
   end
   object PopupMenu1: TPopupMenu
     Left = 56

@@ -82,9 +82,10 @@ begin
     if remote then
     begin
       try
-        {$ifdef USE_DEBUGSERVER}
-        DataBaseServer := TServer.Create({HTTPServer=}true);
-        {$endif}
+        if ownserver then
+        begin
+          DataBaseServer := TServer.Create({HTTPServer=}true);
+        end;
         try
           DataBaseConnection:=TClient.Create('localhost');
           with DataBaseConnection AS TClient do
@@ -105,7 +106,7 @@ begin
     else
     begin
       try
-        DataBaseConnection:=TServer.Create({$ifdef USE_DEBUGSERVER}true{$else}false{$endif});
+        DataBaseConnection:=TServer.Create(ownserver);
         with DataBaseConnection AS TServer do
         begin
           fPS:=ServerProductService;

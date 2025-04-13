@@ -99,8 +99,6 @@ var
   Instance: TRttiCustom;
   MyProduct:TProduct;
   Product:TProduct;
-  StageData:TStageData;
-  TestData:TTestData;
   SampleData:TRunData;
   RunData:TRunDataCollection;
   MeasurementData:TMeasurementData;
@@ -113,15 +111,15 @@ var
     MyProduct := MyColl.Add as TProduct;
     Check(MyProduct.ClassType = TProduct);
 
-    MyProduct.B_code:='ID000';
+    MyProduct.ProductCode:='ID000';
     U := ObjectToJson(MyColl);
     P := UniqueRawUtf8(U); // make local copy of source constant
 
-    MyProduct.B_code:='ID001';
+    MyProduct.ProductCode:='ID001';
     JsonToObject(MyColl,P,Valid);
     Check(Valid);
 
-    Check(MyProduct.B_code='ID000');
+    Check(MyProduct.ProductCode='ID000');
 
     MyColl.Free;
   end;
@@ -133,26 +131,6 @@ begin
     U := ObjectToJson(Product);
     check(IsValidJson(U));
 
-    StageData:=Product.Stages.Add;
-    StageData.SValueText:='1234';
-
-    U := ObjectToJson(Product);
-    check(IsValidJson(U));
-
-    TestData:=Product.TestDatas.Add;
-    U := ObjectToJson(Product);
-    check(IsValidJson(U));
-
-    SampleData:=TestData.RunDatas.Add;
-    SampleData.SampleNumber:=1;
-    SampleData.AddMeasurementData(Now);
-
-    U := ObjectToJson(SampleData);
-    check(IsValidJson(U));
-
-    U := ObjectToJson(Product);
-    check(IsValidJson(U));
-
     U := ObjectToJson(Product,[woStoreClassName]);
     check(IsValidJson(U));
 
@@ -161,57 +139,6 @@ begin
     MyProduct:=TProduct(JsonToNewObject(P,Valid{,[jpoObjectListClassNameGlobalFindClass]}));
     try
       Check(Valid);
-
-      TestData:=MyProduct.GetMeasurementTestData;
-      TestData.Info:='Measurement TestData';
-
-      SampleData:=MyProduct.GetMeasurementSampleData(1);
-      Check(SampleData.SampleNumber=1);
-
-      StageData:=MyProduct.GetStageData(0);
-      StageData.SValueText:='9999';
-
-      U := ObjectToJson(MyProduct);
-      check(IsValidJson(U));
-
-      P := UniqueRawUtf8(U); // make local copy of source constant
-      Check(JsonToObject(Product, P, Valid)^ = #0);
-      Check(Valid);
-
-      TestData:=Product.GetMeasurementTestData;
-      Check(TestData.Info='Measurement TestData');
-
-      SampleData:=TestData.RunDatas.Add;
-      SampleData.SampleNumber:=200;
-
-      Check(TestData.RunDatas.Count=2);
-
-      SampleData.AddMeasurementData(Now);
-      U := ObjectToJson(SampleData);
-      check(IsValidJson(U));
-
-      StageData:=Product.GetStageData(0);
-      Check(StageData.SValueText='9999');
-
-      MyProduct.B_code:='YOLO!!!';
-      StageData:=MyProduct.GetStageData(0);
-      ClearObject(MyProduct);
-      ClearObject(StageData);
-      StageData:=MyProduct.GetStageData(0);
-
-      J := ObjectToJson(Product, [woHumanReadable]);
-
-      m.Init(TOrmRunData, TRunData).AutoMap;
-
-      SampleData.BoardSerial:='Hallo allemaal !!!!';
-
-      os := m.ToA(SampleData);
-
-      Check(os.SampleNumber=200);
-      Check(os.BoardSerial='Hallo allemaal !!!!');
-
-      os.Free;
-
     finally
       MyProduct.Free;
     end;
@@ -241,117 +168,21 @@ procedure TestServices;
 var
   Product           : TProduct;
   AllProducts       : TProductCollection;
-  TestData          : TTestData;
-  TestDatas         : TTestCollection;
-  SampleData        : TRunData;
-  SampleDatas       : TRunDataCollection;
-  TD                : TThresholdDataItem;
   Document          : TDocument;
   D                 : double;
   i,j               : integer;
   TMode             : TThresholdModes;
-  localtimer        : TPrecisionTimer;
 
 begin
   Product:=TProduct.Create(nil);
   try
-    Product.B_code:='Product001';
+    Product.ProductCode:='Product001';
 
     Check(ProductService.AddProduct(Product) = seSuccess);
     Check(ProductService.GetProduct(Product) = seSuccess);
 
-    TestData:=Product.TestDatas.Add;
-
-    TestData.StageMode:=TStageMode.smCurrent;
-    TestData.SetValue:=1234;
-
-    SampleDatas:=TestData.RunDatas;
-
-    localtimer.Start;
-
-    for i:=1 to NUMRUNDATAS do
-    begin
-      SampleData:=SampleDatas.Add;
-
-      SampleData.SampleNumber:=i;
-
-      for j:=1 to NUMMEASUREMENTS do
-      begin
-        SampleData.MeasuredVoltage:=1111;
-        SampleData.AddMeasurementData(Now);
-        SampleData.MeasuredVoltage:=2222;
-        SampleData.AddMeasurementData(Now);
-      end;
-      Check(SampleData.NewLiveData.Count=(NUMMEASUREMENTS*2));
-
-      SampleData.ThresholdDataCollection.AddOrUpdate(TThresholdModes.tmMINV,true,TD);
-      TD.Triggered:=True;
-      TD.Data:=1.987;
-
-      // Add the rundata into the database
-      Check(ProductService.AddRunData(Product.B_code,TestData.StageMode,TestData.SetValue,SampleData) = seSuccess);
-
-      SampleData.NewLiveData.Clear;
-      SampleData.SampleNumber:=0;
-      //Retrieve the rundata from the database
-      Check(ProductService.FindRunData(Product.B_code,TestData.StageMode,TestData.SetValue,i,SampleData) = seSuccess);
-
-      Check(SampleData.SampleNumber=i);
-      Check(SampleData.NewLiveData.Count=(NUMMEASUREMENTS*2));
-
-      D:=SampleData.NewLiveData.Item[0].Voltage;
-      CheckSame(D,1111);
-      D:=SampleData.NewLiveData.Item[1].Voltage;
-      CheckSame(D,2222);
-    end;
-    NotifyTestSpeed('Storing and checking rundata', 0, 0, @localtimer);
-
-    SampleDatas:=TestData.RunDatas;
-    SampleDatas.Clear;
-    Check(SampleDatas.Count=0);
-
-    localtimer.Start;
-    Check(ProductService.FindRunDatas(Product.B_code,TestData.StageMode,TestData.SetValue,{Summary=}true,SampleDatas) = seSuccess);
-    json:=ObjectToJSON(SampleDatas);
-    Check(SampleDatas.Count=NUMRUNDATAS);
-    for i:=1 to NUMRUNDATAS do
-    begin
-      SampleData:=SampleDatas.Item[i-1];
-      CheckSame(SampleData.NewLiveData.Count,1);
-      D:=SampleData.NewLiveData.Item[0].Voltage;
-      CheckSame(D,2222);
-      TD:=SampleData.ThresholdDataCollection.Item[0];
-      Check(TD.Mode=TThresholdModes.tmMINV);
-      Check(TD.Triggered);
-      CheckSame(TD.Data,1.987);
-    end;
-    NotifyTestSpeed('Retrieving summary of rundata', 0, 0, @localtimer);
-
-
-    SampleDatas:=TestData.RunDatas;
-    SampleDatas.Clear;
-    Check(SampleDatas.Count=0);
-
-    localtimer.Start;
-    Check(ProductService.FindRunDatas(Product.B_code,TestData.StageMode,TestData.SetValue,{Summary=}false,SampleDatas) = seSuccess);
-    Check(SampleDatas.Count=NUMRUNDATAS);
-    for i:=1 to NUMRUNDATAS do
-    begin
-      SampleData:=SampleDatas.Item[i-1];
-      CheckSame(SampleData.NewLiveData.Count,(NUMMEASUREMENTS*2));
-      D:=SampleData.NewLiveData.Item[0].Voltage;
-      CheckSame(D,1111);
-      D:=SampleData.NewLiveData.Item[1].Voltage;
-      CheckSame(D,2222);
-      TD:=SampleData.ThresholdDataCollection.Item[0];
-      Check(TD.Mode=TThresholdModes.tmMINV);
-      Check(TD.Triggered);
-      CheckSame(TD.Data,1.987);
-    end;
-    NotifyTestSpeed('Retrieving all of rundata', 0, 0, @localtimer);
-
     Document:=TDocument.Create(nil);
-    DocumentService.FindDocument(Product.B_code,Document);
+    DocumentService.FindDocument(Product.ProductCode,Document);
     Document.Free;
 
     AllProducts:=TProductCollection.Create;
@@ -437,117 +268,21 @@ procedure TestServices;
 var
   Product           : TProduct;
   AllProducts       : TProductCollection;
-  TestData          : TTestData;
-  TestDatas         : TTestCollection;
-  SampleData        : TRunData;
-  SampleDatas       : TRunDataCollection;
-  TD                : TThresholdDataItem;
   Document          : TDocument;
   D                 : double;
   i,j               : integer;
   TMode             : TThresholdModes;
-  localtimer        : TPrecisionTimer;
 
 begin
   Product:=TProduct.Create(nil);
   try
-    Product.B_code:='Product001';
+    Product.ProductCode:='Product001';
 
     Check(ProductService.AddProduct(Product) = seSuccess);
     Check(ProductService.GetProduct(Product) = seSuccess);
 
-    TestData:=Product.TestDatas.Add;
-
-    TestData.StageMode:=TStageMode.smCurrent;
-    TestData.SetValue:=1234;
-
-    SampleDatas:=TestData.RunDatas;
-
-    localtimer.Start;
-
-    for i:=1 to NUMRUNDATAS do
-    begin
-      SampleData:=SampleDatas.Add;
-
-      SampleData.SampleNumber:=i;
-
-      for j:=1 to NUMMEASUREMENTS do
-      begin
-        SampleData.MeasuredVoltage:=1111;
-        SampleData.AddMeasurementData(Now);
-        SampleData.MeasuredVoltage:=2222;
-        SampleData.AddMeasurementData(Now);
-      end;
-      Check(SampleData.NewLiveData.Count=(NUMMEASUREMENTS*2));
-
-      SampleData.ThresholdDataCollection.AddOrUpdate(TThresholdModes.tmMINV,true,TD);
-      TD.Triggered:=True;
-      TD.Data:=1.987;
-
-      // Add the rundata into the database
-      Check(ProductService.AddRunData(Product.B_code,TestData.StageMode,TestData.SetValue,SampleData) = seSuccess);
-
-      SampleData.NewLiveData.Clear;
-      SampleData.SampleNumber:=0;
-      //Retrieve the rundata from the database
-      Check(ProductService.FindRunData(Product.B_code,TestData.StageMode,TestData.SetValue,i,SampleData) = seSuccess);
-
-      Check(SampleData.SampleNumber=i);
-      Check(SampleData.NewLiveData.Count=(NUMMEASUREMENTS*2));
-
-      D:=SampleData.NewLiveData.Item[0].Voltage;
-      CheckSame(D,1111);
-      D:=SampleData.NewLiveData.Item[1].Voltage;
-      CheckSame(D,2222);
-    end;
-    NotifyTestSpeed('Storing and checking rundata', 0, 0, @localtimer);
-
-    SampleDatas:=TestData.RunDatas;
-    SampleDatas.Clear;
-    Check(SampleDatas.Count=0);
-
-    localtimer.Start;
-    Check(ProductService.FindRunDatas(Product.B_code,TestData.StageMode,TestData.SetValue,{Summary=}true,SampleDatas) = seSuccess);
-    json:=ObjectToJSON(SampleDatas);
-    Check(SampleDatas.Count=NUMRUNDATAS);
-    for i:=1 to NUMRUNDATAS do
-    begin
-      SampleData:=SampleDatas.Item[i-1];
-      CheckSame(SampleData.NewLiveData.Count,1);
-      D:=SampleData.NewLiveData.Item[0].Voltage;
-      CheckSame(D,2222);
-      TD:=SampleData.ThresholdDataCollection.Item[0];
-      Check(TD.Mode=TThresholdModes.tmMINV);
-      Check(TD.Triggered);
-      CheckSame(TD.Data,1.987);
-    end;
-    NotifyTestSpeed('Retrieving summary of rundata', 0, 0, @localtimer);
-
-
-    SampleDatas:=TestData.RunDatas;
-    SampleDatas.Clear;
-    Check(SampleDatas.Count=0);
-
-    localtimer.Start;
-    Check(ProductService.FindRunDatas(Product.B_code,TestData.StageMode,TestData.SetValue,{Summary=}false,SampleDatas) = seSuccess);
-    Check(SampleDatas.Count=NUMRUNDATAS);
-    for i:=1 to NUMRUNDATAS do
-    begin
-      SampleData:=SampleDatas.Item[i-1];
-      CheckSame(SampleData.NewLiveData.Count,(NUMMEASUREMENTS*2));
-      D:=SampleData.NewLiveData.Item[0].Voltage;
-      CheckSame(D,1111);
-      D:=SampleData.NewLiveData.Item[1].Voltage;
-      CheckSame(D,2222);
-      TD:=SampleData.ThresholdDataCollection.Item[0];
-      Check(TD.Mode=TThresholdModes.tmMINV);
-      Check(TD.Triggered);
-      CheckSame(TD.Data,1.987);
-    end;
-    NotifyTestSpeed('Retrieving all of rundata', 0, 0, @localtimer);
-
     Document:=TDocument.Create(nil);
-    DocumentService.FindDocument(Product.B_code,Document);
+    DocumentService.FindDocument(Product.ProductCode,Document);
     Document.Free;
 
     AllProducts:=TProductCollection.Create;
