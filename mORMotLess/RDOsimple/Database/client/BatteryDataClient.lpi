@@ -23,8 +23,8 @@
             <Filename Value="..\bins\$NameOnly($(ProjFile))\$(TargetCPU)-$(TargetOS)\$NameOnly($(ProjFile))"/>
           </Target>
           <SearchPaths>
-            <IncludeFiles Value="$(ProjOutDir);..\services"/>
-            <OtherUnitFiles Value="..\..\Share;..\server;..\services;..\services\document;..\services\product;..\services\rundata"/>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="..\..\Share"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -99,8 +99,8 @@
       <Filename Value="..\bins\$NameOnly($(ProjFile))\$(TargetCPU)-$(TargetOS)\$NameOnly($(ProjFile))"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir);..\services"/>
-      <OtherUnitFiles Value="..\..\Share;..\server;..\services;..\services\document;..\services\product;..\services\rundata"/>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="..\..\Share"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

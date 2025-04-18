@@ -6,8 +6,6 @@ unit databaseinfra;
 {$MODESWITCH ADVANCEDRECORDS}
 {$OPTIMIZATION NOORDERFIELDS}
 
-{$I globaldefines.inc}
-
 interface
 
 uses
