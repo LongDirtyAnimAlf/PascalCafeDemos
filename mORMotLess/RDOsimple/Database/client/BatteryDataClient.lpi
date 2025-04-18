@@ -65,7 +65,7 @@
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="mormot2"/>
+        <PackageName Value="DateTimeCtrls"/>
       </Item1>
       <Item2>
         <PackageName Value="FCL"/>
@@ -103,6 +103,18 @@
       <OtherUnitFiles Value="..\..\Share;..\server;..\services;..\services\document;..\services\product;..\services\rundata"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <CodeGeneration>
+      <Checks>
+        <IOChecks Value="True"/>
+        <RangeChecks Value="True"/>
+        <OverflowChecks Value="True"/>
+        <StackChecks Value="True"/>
+      </Checks>
+      <VerifyObjMethodCallValidity Value="True"/>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
+    </CodeGeneration>
     <Linking>
       <Debugging>
         <DebugInfoType Value="dsDwarf3"/>

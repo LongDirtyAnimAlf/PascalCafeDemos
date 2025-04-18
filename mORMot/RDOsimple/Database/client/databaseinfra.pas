@@ -55,9 +55,7 @@ type
 implementation
 
 uses
-  {$ifdef USE_DEBUGSERVER}
   server,
-  {$endif}
   client;
 
 constructor TSharedmORMotDDD.Create;
