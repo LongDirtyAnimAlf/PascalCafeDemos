@@ -120,31 +120,53 @@ end;
 
 function TSharedmORMotDDD.GetProduct(var Product: TProduct):boolean;
 begin
+  // Nothing to be done
   result:=false;
 end;
 
 function TSharedmORMotDDD.AddProduct(const Product: TProduct):boolean;
 begin
+  // Nothing to be done
   result:=false;
 end;
 
 function TSharedmORMotDDD.UpdateProductCode(const Product: TProduct; const NewCode:RawUTF8):boolean;
 begin
   result:=false;
+  if (Product.ProductCode<>NewCode) then
+  begin
+    Product.ProductCode:=NewCode;
+    // This statement triggers a notify change with the item itself as the data !!
+    Product.DisplayName:=Product.ProductCode;
+    result:=true;
+  end;
 end;
 
 function TSharedmORMotDDD.UpdateProduct(const Product: TProduct; const FieldInfo:RawUTF8):boolean;
 begin
   result:=false;
+  if (FieldInfo='*') then
+  begin
+    // As we do not check for changes of the data, this update will also be triggered when the edit leaves the focus
+    // See: procedure TWinControl.WMKillFocus(var Message: TLMKillFocus); in wincontrols.inc
+    // This WMKillFocus procedure will also call EditingDone unfortunately
+
+    // Product fields are already updated in the GUI, so noting to be done here
+    // This statement triggers a notify change with the item itself as the data !!
+    Product.DisplayName:=Product.ProductCode;
+    result:=true;
+  end;
 end;
 
 function TSharedmORMotDDD.DeleteProduct(const Product: TProduct):boolean;
 begin
+  // Nothing to be done
   result:=false;
 end;
 
 function TSharedmORMotDDD.ChangedProduct(const Product: TProduct; out Changed:boolean):boolean;
 begin
+  // Nothing to be done
   result:=false;
 end;
 
@@ -166,10 +188,24 @@ begin
 end;
 
 function TSharedmORMotDDD.AddDocument(var AProductDocument: TProductDocument):boolean;
+var
+  Document       : TDocument;
+  LocalProduct   : TProduct;
 begin
   result:=false;
   if Assigned(AProductDocument) then
   begin
+    LocalProduct:=AProductDocument.GetOwner;
+    Document:=TDocument.Create(nil);
+    try
+      Document.SetPath(AProductDocument.Path,True);
+      Document.ProductCode:=LocalProduct.ProductCode;
+      Document.Hash:=AProductDocument.Hash;
+      AProductDocument.FileThumb:=Document.FileThumb;
+      result:=true;
+    finally
+      Document.Free;
+    end;
   end;
 end;
 

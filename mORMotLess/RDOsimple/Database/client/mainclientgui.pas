@@ -24,12 +24,10 @@ type
   end;
 
   { Define an observer }
-  (*
   TMyObserver = class(TInterfacedObject, IFPObserver)
   public
     procedure FPOObservedChanged(ASender: TObject; Operation: TFPObservedOperation; Data: Pointer);
   end;
-  *)
 
   { TForm1 }
 
@@ -37,7 +35,7 @@ type
     btnConnectLocal: TButton;
     btnAddProduct: TButton;
     btnConnectRemote: TButton;
-    Button1: TButton;
+    btnSave: TButton;
     DetailImage2: TImage;
     DetailImage3: TImage;
     DetailImage4: TImage;
@@ -52,6 +50,7 @@ type
     ImageList1: TImageList;
     ImageListDocument: TImageList;
     ListViewProductDocs: TListView;
+    Memo1: TMemo;
     ProductDrawGrid: TDrawGrid;
     MemoParticularities: TMemo;
     memoRemarks: TMemo;
@@ -66,7 +65,7 @@ type
     tsOverview: TTabSheet;
     tsImages: TTabSheet;
     procedure btnAddProductClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
     procedure FieldEditingDone(Sender: TObject);
     procedure ProductDrawGridHeaderClick(Sender: TObject; IsColumn: Boolean;
       Index: Integer);
@@ -81,6 +80,8 @@ type
   private
     ProductVisual       : TProductVisual;
     DataBusy            : integer;
+
+    MyObserver : TMyObserver;
 
     procedure ProductGridSelectCell(Sender: TObject; ACol, ARow: Longint; var CanSelect: Boolean);
     procedure ProductGridAfterSelection(Sender: TObject; aCol,aRow: Integer);
@@ -171,12 +172,10 @@ var
 begin
   Products:=TProductCollection.Create;
 
-  (*
   // Create observer
   MyObserver := TMyObserver.Create;
   // Attach observer to collection (TPersistent handles this)
   Products.FPOAttachObserver(MyObserver);
-  *)
 
   SharedmORMotData := TSharedmORMotDDD.Create;
 
@@ -221,6 +220,8 @@ begin
   SharedmORMotData:=nil;
 
   Products.Free;
+
+  MyObserver.Free;
 
   ProductVisual.Free;
 
@@ -420,7 +421,7 @@ begin
   RefreshGUI;
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.btnSaveClick(Sender: TObject);
 begin
   SharedmORMotData.SaveProductTable(Products);
 end;
@@ -679,7 +680,6 @@ begin
   if Products.Count>0 then GetDataFromGridRow(ProductDrawGrid,ProductDrawGrid.Row);
 end;
 
-(*
 procedure TMyObserver.FPOObservedChanged(ASender: TObject; Operation: TFPObservedOperation; Data: Pointer);
 begin
   case Operation of
@@ -694,8 +694,13 @@ begin
     ooCustom:
       Form1.Memo1.Append('Item custom');
   end;
+
+  if Assigned(Data) then
+  begin
+    Form1.Memo1.Append('Code: '+TProduct(Data).Code);
+  end;
+
 end;
-*)
 
 end.
 
