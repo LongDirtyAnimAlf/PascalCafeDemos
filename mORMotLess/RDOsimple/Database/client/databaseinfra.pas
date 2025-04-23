@@ -1,10 +1,6 @@
 unit databaseinfra;
 
-//{$mode ObjFPC}{$H+}
-
-{$MODE OBJFPC}{$H+}
-{$MODESWITCH ADVANCEDRECORDS}
-{$OPTIMIZATION NOORDERFIELDS}
+{$mode ObjFPC}{$H+}
 
 interface
 
@@ -21,6 +17,7 @@ uses
 type
   TSharedmORMotDDD = class(TObject)
   private
+    Documents: TDocumentCollection;
     procedure restoreProperty(Sender : TObject; AObject : TObject; Info : PPropInfo;
       AValue : TJSONData; Var Handled : Boolean);
   public
@@ -37,7 +34,6 @@ type
     function  DeleteProduct(const Product: TProduct):boolean;
     function  ChangedProduct(const Product: TProduct;out Changed:boolean):boolean;
 
-    function  GetDocuments(const Product: TProduct; var ADocuments: TDocumentCollection):boolean;
     function  GetDocument(const AProductDocument: TProductDocument; var ADocument: TDocument):boolean;
     function  GetDocumentThumb(const AProductDocument: TProductDocument):boolean;
     function  AddDocument(var AProductDocument: TProductDocument):boolean;
@@ -46,13 +42,19 @@ type
 
 implementation
 
+const
+  DATABASEFILE    = 'database.json';
+  DOCUMENTSFILE   = 'documents.json';
+
 constructor TSharedmORMotDDD.Create;
 begin
   inherited Create;
+  Documents:=TDocumentCollection.Create;
 end;
 
 destructor TSharedmORMotDDD.Destroy;
 begin
+  Documents.Free;
   inherited Destroy;
 end;
 
@@ -64,11 +66,24 @@ begin
 
   if Info^.PropType = TProductDocumentCollection.ClassInfo then
   begin
+    // We might do some special things for the product documents collection if needed
+  end;
+
+  if AObject.ClassType=TDocument then
+  begin
     // We might do some special things for the documents collection if needed
+    if (NOT IsWriteableProp(Info)) then
+    begin
+      //SetStrProp(AObject,Info,AValue.Value);
+    end;
   end;
 
   // Prevent readonly properties to cause an exception
-  if (Info^.SetProc=nil) then Handled:=True;
+  if (NOT IsWriteableProp(Info)) then
+  begin
+    // We cannot write to field ... might cause problems !!
+    Handled:=True;
+  end;
 end;
 
 function TSharedmORMotDDD.GetProductTable(var Products:TProductCollection):boolean;
@@ -79,18 +94,42 @@ begin
   result:=false;
   if Assigned(Products) then
   begin
-    JD := TJSONDeStreamer.Create(nil);
-    try
-      MS := TStringStream.Create;
+
+    if FileExists(DATABASEFILE) then
+    begin
+      // Get all products from product store
+      JD := TJSONDeStreamer.Create(nil);
       try
-        MS.LoadFromFile('database.json');
-        JD.OnRestoreProperty := @restoreProperty;
-        JD.JSONToCollection(MS.DataString,Products);
+        MS := TStringStream.Create;
+        try
+          MS.LoadFromFile(DATABASEFILE);
+          JD.OnRestoreProperty := @restoreProperty;
+          JD.JSONToCollection(MS.DataString,Products);
+        finally
+          MS.Free;
+        end;
       finally
-        MS.Free;
+        JD.Free;
       end;
-    finally
-      JD.Free;
+
+      if FileExists(DOCUMENTSFILE) then
+      begin
+        // Get all docments from document store
+        JD := TJSONDeStreamer.Create(nil);
+        try
+          MS := TStringStream.Create;
+          try
+            MS.LoadFromFile(DOCUMENTSFILE);
+            JD.OnRestoreProperty := @restoreProperty;
+            JD.JSONToCollection(MS.DataString,Documents);
+          finally
+            MS.Free;
+          end;
+        finally
+          JD.Free;
+        end;
+      end;
+
     end;
   end;
 end;
@@ -103,18 +142,41 @@ begin
   result:=true;
   if Assigned(Products) then
   begin
-    JS := TJSONStreamer.Create(nil);
-    try
-      MS := TStringStream.Create;
+
+    // Save all products if any
+    if (Products.Count>0) then
+    begin
+      JS := TJSONStreamer.Create(nil);
       try
-        MS.WriteString(JS.CollectionToJSON(Products));
-        MS.SaveToFile('database.json');
+        MS := TStringStream.Create;
+        try
+          MS.WriteString(JS.CollectionToJSON(Products));
+          MS.SaveToFile(DATABASEFILE);
+        finally
+          MS.Free;
+        end;
       finally
-        MS.Free;
+        JS.Free;
       end;
-    finally
-      JS.Free;
     end;
+
+    // Save all documents, if any
+    if (Documents.Count>0) then
+    begin
+      JS := TJSONStreamer.Create(nil);
+      try
+        MS := TStringStream.Create;
+        try
+          MS.WriteString(JS.CollectionToJSON(Documents));
+          MS.SaveToFile(DOCUMENTSFILE);
+        finally
+          MS.Free;
+        end;
+      finally
+        JS.Free;
+      end;
+    end;
+
   end;
 end;
 
@@ -170,14 +232,21 @@ begin
   result:=false;
 end;
 
-function TSharedmORMotDDD.GetDocuments(const Product: TProduct; var ADocuments: TDocumentCollection):boolean;
-begin
-  result:=false;
-end;
-
 function TSharedmORMotDDD.GetDocument(const AProductDocument: TProductDocument; var ADocument: TDocument):boolean;
+var
+  Document:TDocument;
 begin
   result:=false;
+  if Assigned(ADocument) then
+  begin
+    // Get the document if any
+    Documents.AddOrUpdate(AProductDocument.Hash,false,Document);
+    if Assigned(Document) then
+    begin
+      ADocument.Assign(Document);
+      result:=true;
+    end;
+  end;
 end;
 
 function TSharedmORMotDDD.GetDocumentThumb(const AProductDocument: TProductDocument):boolean;
@@ -185,27 +254,33 @@ var
   Document:TDocument;
 begin
   result:=false;
+  if Assigned(AProductDocument) then
+  begin
+    // Get the document if any
+    Documents.AddOrUpdate(AProductDocument.Hash,false,Document);
+    if Assigned(Document) then result:=true;
+    if result then
+    begin
+      AProductDocument.FileThumb:=Document.FileThumb;
+    end;
+  end;
 end;
 
 function TSharedmORMotDDD.AddDocument(var AProductDocument: TProductDocument):boolean;
 var
-  Document       : TDocument;
   LocalProduct   : TProduct;
+  Document       : TDocument;
 begin
   result:=false;
   if Assigned(AProductDocument) then
   begin
     LocalProduct:=AProductDocument.GetOwner;
-    Document:=TDocument.Create(nil);
-    try
-      Document.SetPath(AProductDocument.Path,True);
-      Document.ProductCode:=LocalProduct.ProductCode;
-      Document.Hash:=AProductDocument.Hash;
-      AProductDocument.FileThumb:=Document.FileThumb;
-      result:=true;
-    finally
-      Document.Free;
-    end;
+    Documents.AddOrUpdate(AProductDocument.Hash,true,Document);
+    Document.SetPath(AProductDocument.Path,True);
+    Document.ProductCode:=LocalProduct.ProductCode;
+    Document.Hash:=AProductDocument.Hash;
+    AProductDocument.FileThumb:=Document.FileThumb;
+    result:=true;
   end;
 end;
 

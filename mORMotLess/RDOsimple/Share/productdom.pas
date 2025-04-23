@@ -108,6 +108,21 @@ begin
     result:=SysUtils.StrComp(PChar(pointer(TProduct(a).Model)),PChar(pointer(TProduct(b).Model)));
 end;
 
+function GetFileSize(const FileName: string): int64;
+Var
+  F : file of byte;
+begin
+  result:=0;
+  assign (F,FileName);
+  try
+    reset(F);
+    result:=filesize(F);
+  finally
+    close(F);
+  end;
+end;
+
+
 { TProductDocument }
 
 function TProductDocument.GetHash:ansistring;
@@ -115,7 +130,8 @@ var
   FS:int64;
   MD5Hash: TMD5Digest;
 begin
-  FS:=GetTickCount64;
+  //FS:=GetTickCount64;
+  FS:=GetFileSize(fPath);
   MD5Hash := MD5String(Format('%s'#1'%d'#2,[fPath,FS]));
   result := MD5Print(MD5Hash);
 end;
