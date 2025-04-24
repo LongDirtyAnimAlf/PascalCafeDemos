@@ -74,22 +74,26 @@ begin
   if (NOT IsWriteableProp(Info)) then
   begin
     // This is or might be very "dirty" !!!
-    // Trick to write fields that do not have write access
+    // Trick to write fields that do not have write access by writing to read field
     // But its the same way as done by the mORMot
     // FPC only !!
     {$ifdef FPC}
-    PI := Info^;
-    PI.PropProcs:=(PI.PropProcs shl 2);
-    if ((PI.GetProc<>nil) AND ((integer(PI.PropProcs) and 3 = ptField))) then
+    if (IsReadableProp(Info)) then
     begin
-      PI.SetProc:=PI.GetProc;
-      case PI.PropType^.Kind of
-        tkAString,tkWString,tkUString,tkSString: SetStrProp(AObject,@PI,AValue.AsString);
-        tkInteger: SetOrdProp(AObject,@PI,AValue.AsInt64);
-      else
-        SetVariantProp(AObject,@PI,AValue.Value);
+      PI := Info^;
+      PI.PropProcs:=(PI.PropProcs shl 2); // shift read-procs towards write-procs
+      PI.SetProc:=PI.GetProc; // use getproc as setproc
+      if ((PI.SetProc<>nil) AND ((integer(PI.PropProcs) and 3 = ptField))) then
+      begin
+        case PI.PropType^.Kind of
+          tkAString,tkWString,tkUString,tkSString: SetStrProp(AObject,@PI,AValue.AsString);
+          tkInteger: SetOrdProp(AObject,@PI,AValue.AsInteger);
+          tkInt64,tkQWord: SetInt64Prop(AObject,@PI,AValue.AsInt64);
+        else
+          SetVariantProp(AObject,@PI,AValue.Value);
+        end;
+        Handled:=True;
       end;
-      Handled:=True;
     end;
     {$endif FPC}
   end;
