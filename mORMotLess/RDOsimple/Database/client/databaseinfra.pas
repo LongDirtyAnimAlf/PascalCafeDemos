@@ -76,16 +76,22 @@ begin
     // This is or might be very "dirty" !!!
     // Trick to write fields that do not have write access
     // But its the same way as done by the mORMot
+    // FPC only !!
+    {$ifdef FPC}
     PI := Info^;
     PI.PropProcs:=(PI.PropProcs shl 2);
-    PI.SetProc:=PI.GetProc;
-    case PI.PropType^.Kind of
-      tkAString: SetStrProp(AObject,@PI,AValue.AsString);
-      tkInteger: SetOrdProp(AObject,@PI,AValue.AsInt64);
-    else
-      SetVariantProp(AObject,@PI,AValue.Value);
+    if ((PI.GetProc<>nil) AND ((integer(PI.PropProcs) and 3 = ptField))) then
+    begin
+      PI.SetProc:=PI.GetProc;
+      case PI.PropType^.Kind of
+        tkAString,tkWString,tkUString,tkSString: SetStrProp(AObject,@PI,AValue.AsString);
+        tkInteger: SetOrdProp(AObject,@PI,AValue.AsInt64);
+      else
+        SetVariantProp(AObject,@PI,AValue.Value);
+      end;
+      Handled:=True;
     end;
-    Handled:=True;
+    {$endif FPC}
   end;
 end;
 
