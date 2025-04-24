@@ -3,7 +3,7 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="12"/>
-    <BuildModes Active="Debug"/>
+    <BuildModes Active="Release"/>
     <Units Count="442">
       <Unit0>
         <Filename Value="BatteryDataClient.lpr"/>
@@ -25,7 +25,6 @@
       <Unit2>
         <Filename Value="databaseinfra.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="49"/>
         <CursorPos Y="59"/>
@@ -2067,10 +2066,12 @@
       </Unit287>
       <Unit288>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.rtti.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="9895"/>
-        <CursorPos X="3" Y="9901"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="1005"/>
+        <CursorPos X="11" Y="1031"/>
         <UsageCount Value="14"/>
+        <Loaded Value="True"/>
       </Unit288>
       <Unit289>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.collections.pas"/>
@@ -2192,10 +2193,10 @@
       </Unit305>
       <Unit306>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.rtti.fpc.inc"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="98"/>
-        <CursorPos Y="109"/>
-        <UsageCount Value="6"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="79"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit306>
       <Unit307>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.rtti.delphi.inc"/>
@@ -3081,7 +3082,7 @@
       </Unit431>
       <Unit432>
         <Filename Value="..\services\product\productinfra.pas"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="34"/>
         <CursorPos X="14" Y="64"/>
         <UsageCount Value="12"/>
@@ -3091,13 +3092,13 @@
         <Filename Value="..\services\product\productserviceinterface.pas"/>
         <EditorIndex Value="5"/>
         <TopLine Value="3"/>
-        <CursorPos X="9" Y="11"/>
+        <CursorPos X="17" Y="8"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit433>
       <Unit434>
         <Filename Value="..\services\product\productstorageimplementation.pas"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="10"/>
         <TopLine Value="249"/>
         <CursorPos X="25" Y="74"/>
         <UsageCount Value="12"/>
@@ -3105,7 +3106,7 @@
       </Unit434>
       <Unit435>
         <Filename Value="..\services\product\productstorageinterface.pas"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="9"/>
         <CursorPos X="7" Y="11"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
@@ -3152,7 +3153,7 @@
         <UsageCount Value="10"/>
       </Unit441>
     </Units>
-    <JumpHistory Count="24" HistoryIndex="23">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="mainclientgui.pas"/>
         <Caret Line="358" TopLine="337"/>
@@ -3249,6 +3250,18 @@
         <Filename Value="..\services\product\productstorageinterface.pas"/>
         <Caret Line="11" Column="7"/>
       </Position24>
+      <Position25>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.rtti.fpc.inc"/>
+        <Caret Line="109" TopLine="98"/>
+      </Position25>
+      <Position26>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.rtti.pas"/>
+        <Caret Line="9901" Column="3" TopLine="9895"/>
+      </Position26>
+      <Position27>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.rtti.pas"/>
+        <Caret TopLine="907"/>
+      </Position27>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

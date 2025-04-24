@@ -60,6 +60,8 @@ end;
 
 procedure TSharedmORMotDDD.restoreProperty(Sender : TObject; AObject : TObject; Info : PPropInfo;
   AValue : TJSONData; Var Handled : Boolean);
+var
+  PI : TPropInfo;
 begin
   if not (Sender is TJSONDeStreamer) then
     raise EJSONRTTI.Create('Sender has invalid type');
@@ -69,19 +71,20 @@ begin
     // We might do some special things for the product documents collection if needed
   end;
 
-  if AObject.ClassType=TDocument then
-  begin
-    // We might do some special things for the documents collection if needed
-    if (NOT IsWriteableProp(Info)) then
-    begin
-      //SetStrProp(AObject,Info,AValue.Value);
-    end;
-  end;
-
-  // Prevent readonly properties to cause an exception
   if (NOT IsWriteableProp(Info)) then
   begin
-    // We cannot write to field ... might cause problems !!
+    // This is or might be very "dirty" !!!
+    // Trick to write fields that do not have write access
+    // But its the same way as done by the mORMot
+    PI := Info^;
+    PI.PropProcs:=(PI.PropProcs shl 2);
+    PI.SetProc:=PI.GetProc;
+    case PI.PropType^.Kind of
+      tkAString: SetStrProp(AObject,@PI,AValue.AsString);
+      tkInteger: SetOrdProp(AObject,@PI,AValue.AsInt64);
+    else
+      SetVariantProp(AObject,@PI,AValue.Value);
+    end;
     Handled:=True;
   end;
 end;

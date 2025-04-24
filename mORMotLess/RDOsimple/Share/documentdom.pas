@@ -31,11 +31,11 @@ type
   published
     property ProductCode  : RawUTF8 read fProductCode write fProductCode;
     property Hash         : RawUTF8 read fHash write fHash;
-    property Name         : RawUTF8 read fName write fName;
-    property Path         : RawUTF8 read fPath write fPath;
-    property Size         : integer read fSize write fSize;
-    property FileThumb    : TBlobber read fFileThumb write fFileThumb;
-    property FileContents : TBlobber read fFileContents write fFileContents;
+    property Name         : RawUTF8 read fName;// write fName;
+    property Path         : RawUTF8 read fPath;// write fPath;
+    property Size         : integer read fSize;// write fSize;
+    property FileThumb    : TBlobber read fFileThumb;// write fFileThumb;
+    property FileContents : TBlobber read fFileContents;// write fFileContents;
   end;
 
   TDocumentCollection = class(TCollection)

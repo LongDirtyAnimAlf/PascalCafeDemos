@@ -25,6 +25,7 @@ type
     fFileThumb         : TBlobber;
     fFileContents      : TBlobber;
   public
+    procedure Assign(Source: TPersistent); override;
     procedure SetPath(aValue:RawUTF8;SetFileContents:boolean=false);
     procedure SetThumb(aValue:TBlobber);
   published
@@ -87,21 +88,6 @@ begin
   end;
 end;
 
-
-function GetFileSize(const FileName: string): int64;
-Var
-  F : file of byte;
-begin
-  result:=0;
-  assign (F,FileName);
-  try
-    reset(F);
-    result:=filesize(F);
-  finally
-    close(F);
-  end;
-end;
-
 function DocumentFileNameSort(const A,B): integer;
 begin
   result := SysUtils.StrComp(PChar(pointer(TDocument(A).Name)),PChar(pointer(TDocument(B).Name)));
@@ -146,6 +132,20 @@ begin
   end;
   if Assigned(ReaderClass) then
     Result := ReaderClass.Create;
+end;
+
+procedure TDocument.Assign(Source: TPersistent);
+begin
+  If Assigned(Source) then
+  begin
+    fProductCode       := TDocument(Source).ProductCode;
+    fHash              := TDocument(Source).Hash;
+    fName              := TDocument(Source).Name;
+    fPath              := TDocument(Source).Path;
+    fSize              := TDocument(Source).Size;
+    fFileThumb         := TDocument(Source).FileThumb;
+    fFileContents      := TDocument(Source).FileContents;
+  end;
 end;
 
 procedure TDocument.SetPath(aValue:RawUTF8;SetFileContents:boolean);
