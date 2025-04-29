@@ -87,6 +87,7 @@ begin
             tkAString,tkWString,tkUString,tkSString: SetStrProp(AObject,@PI,AValue.AsString);
             tkInteger: SetOrdProp(AObject,@PI,AValue.AsInteger);
             tkInt64,tkQWord: SetInt64Prop(AObject,@PI,AValue.AsInt64);
+            tkFloat:SetFloatProp(AObject,@PI,AValue.AsFloat);
             tkVariant: SetVariantProp(AObject,@PI,AValue.Value);
         else
           Handled:=False;
