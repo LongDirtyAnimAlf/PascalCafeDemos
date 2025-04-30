@@ -41,6 +41,7 @@ type
     DetailImage4: TImage;
     EditChargeAdvice: TEdit;
     EditBrand: TEdit;
+    EditExpiration: TEdit;
     EditModel: TEdit;
     EditProductCode: TEdit;
     FrontImage: TImage;
@@ -157,6 +158,7 @@ begin
   Form1.EditBrand.Text:=AValue.Brand;
   Form1.EditModel.Text:=AValue.Model;
   Form1.EditChargeAdvice.Text:=AValue.Rechargeable.ChargeAdvice;
+  Form1.EditExpiration.Text:=DateTimeToStr(AValue.ExpirationData);
 end;
 
 procedure TProductVisual.GetAll(const aValue:TProduct);
@@ -418,6 +420,7 @@ begin
   if Products.AddOrUpdate('NewProduct',true,LocalProduct) then
   begin
     //GetDataFromGridRow(nil,1);
+    LocalProduct.Init;
     SharedmORMotData.AddProduct(LocalProduct);
   end;
   RefreshGUI;

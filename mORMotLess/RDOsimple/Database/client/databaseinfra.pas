@@ -44,6 +44,9 @@ type
 
 implementation
 
+uses
+  DateUtils;
+
 const
   DATABASEFILE    = 'database.json';
   DOCUMENTSFILE   = 'documents.json';
@@ -64,6 +67,7 @@ procedure TSharedmORMotDDD.restoreProperty(Sender : TObject; AObject : TObject; 
   AValue : TJSONData; Var Handled : Boolean);
 var
   PI : TPropInfo;
+  S:string;
 begin
   if not (Sender is TJSONDeStreamer) then
     raise EJSONRTTI.Create('Sender has invalid type');
@@ -87,7 +91,16 @@ begin
             tkAString,tkWString,tkUString,tkSString: SetStrProp(AObject,@PI,AValue.AsString);
             tkInteger: SetOrdProp(AObject,@PI,AValue.AsInteger);
             tkInt64,tkQWord: SetInt64Prop(AObject,@PI,AValue.AsInt64);
-            tkFloat:SetFloatProp(AObject,@PI,AValue.AsFloat);
+            tkFloat:
+              begin
+                if PI.PropType=TypeInfo(TDateTime) then
+                begin
+                  S:=DateTimeToStr(AValue.AsFloat);
+                  SetStrProp(AObject,@PI,S);
+                end
+                else
+                  SetFloatProp(AObject,@PI,AValue.AsFloat);
+              end;
             tkVariant: SetVariantProp(AObject,@PI,AValue.Value);
         else
           Handled:=False;
@@ -128,6 +141,7 @@ begin
     begin
       JS := TJSONStreamer.Create(nil);
       try
+        JS.Options:=[jsoDateTimeAsString,jsoCheckEmptyDateTime];
         Data:=JS.CollectionToJSON(Coll);
       finally
         JS.Free;

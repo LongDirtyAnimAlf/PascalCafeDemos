@@ -62,6 +62,7 @@ type
     fProductCode       : RawUTF8;
     fBrand             : RawUTF8;
     fModel             : RawUTF8;
+    fExpirationData    : TDateTime;
     FRechargeable      : TBatteryRechargeable;
     fDocuments         : TProductDocumentCollection;
     fThumb             : TBlobber;
@@ -75,6 +76,7 @@ type
     property ProductCode       : RawUTF8 read fProductCode write fProductCode;
     property Brand             : RawUTF8 read fBrand write fBrand;
     property Model             : RawUTF8 read fModel write fModel;
+    property ExpirationData    : TDateTime read fExpirationData write fExpirationData;
     property Rechargeable      : TBatteryRechargeable read FRechargeable;
     property Documents         : TProductDocumentCollection read fDocuments write fDocuments;
     property Thumb             : TBlobber read fThumb write fThumb;
@@ -228,9 +230,10 @@ end;
 
 procedure TProduct.Init;
 begin
-  ProductCode      := 'Undefined';
-  Brand            := '';
-  Model            := '';
+  ProductCode         := 'Undefined';
+  Brand               := '';
+  Model               := '';
+  Self.ExpirationData := Now;
   with Rechargeable do
   begin
     ChargeAdvice:='charge_unknown';
