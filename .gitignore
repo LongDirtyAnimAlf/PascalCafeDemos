@@ -122,3 +122,7 @@ libs/
 
 .generated_files/
 _ext/
+
+bins/
+*.lps
+*.db3
