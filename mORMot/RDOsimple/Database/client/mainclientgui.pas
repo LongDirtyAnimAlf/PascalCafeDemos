@@ -278,6 +278,7 @@ begin
             SelectedProduct.Documents.AddOrUpdate(aTarget,True,ProductDocument);
             ProductDocument.Path:=locFileName;
             ProductDocument.Target:=aTarget;
+            ProductDocument.SetHash;
             result:=SharedmORMotData.AddDocument(ProductDocument);
             if result then
             begin

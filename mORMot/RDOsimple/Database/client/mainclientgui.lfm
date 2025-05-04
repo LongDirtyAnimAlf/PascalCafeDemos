@@ -1,11 +1,11 @@
 object Form1: TForm1
-  Left = 167
+  Left = 96
   Height = 680
-  Top = 265
-  Width = 1431
+  Top = 190
+  Width = 1284
   Caption = 'Form1'
   ClientHeight = 680
-  ClientWidth = 1431
+  ClientWidth = 1284
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
@@ -318,7 +318,7 @@ object Form1: TForm1
     Left = 432
     Height = 664
     Top = 8
-    Width = 995
+    Width = 848
     ActivePage = tsOverview
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Left = 8
@@ -329,7 +329,7 @@ object Form1: TForm1
     object tsOverview: TTabSheet
       Caption = 'Overview'
       ClientHeight = 636
-      ClientWidth = 987
+      ClientWidth = 840
       object FrontImage: TImage
         AnchorSideLeft.Control = tsOverview
         AnchorSideTop.Control = tsOverview
@@ -812,7 +812,7 @@ object Form1: TForm1
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = BackImage
         AnchorSideBottom.Side = asrBottom
-        Left = 808
+        Left = 661
         Height = 162
         Top = 24
         Width = 175
@@ -851,7 +851,7 @@ object Form1: TForm1
         Left = 297
         Height = 162
         Top = 24
-        Width = 503
+        Width = 356
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Left = 8
         BorderSpacing.Top = 4
@@ -873,7 +873,7 @@ object Form1: TForm1
       object staticDocuments: TStaticText
         AnchorSideLeft.Control = ListViewProductDocs
         AnchorSideTop.Control = tsOverview
-        Left = 808
+        Left = 661
         Height = 16
         Top = 4
         Width = 61
@@ -886,7 +886,7 @@ object Form1: TForm1
     object tsDetails: TTabSheet
       Caption = 'Details'
       ClientHeight = 636
-      ClientWidth = 987
+      ClientWidth = 840
       object grpBaseEdits: TGroupBox
         AnchorSideLeft.Control = tsDetails
         AnchorSideTop.Control = tsDetails
@@ -895,13 +895,13 @@ object Form1: TForm1
         Left = 4
         Height = 112
         Top = 0
-        Width = 979
+        Width = 832
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 4
         BorderSpacing.Right = 4
         Caption = 'Main'
         ClientHeight = 92
-        ClientWidth = 975
+        ClientWidth = 828
         TabOrder = 0
         object EditProductCode: TEdit
           AnchorSideLeft.Control = grpBaseEdits
@@ -946,7 +946,7 @@ object Form1: TForm1
           Left = 4
           Height = 48
           Top = 31
-          Width = 468
+          Width = 321
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Left = 4
           BorderSpacing.Top = 8
@@ -958,7 +958,7 @@ object Form1: TForm1
     object tsImages: TTabSheet
       Caption = 'Detail images'
       ClientHeight = 636
-      ClientWidth = 987
+      ClientWidth = 840
       object DetailImage1: TImage
         Left = 8
         Height = 180
@@ -1887,7 +1887,7 @@ object Form1: TForm1
     object tsAdmin: TTabSheet
       Caption = 'Admin'
       ClientHeight = 636
-      ClientWidth = 987
+      ClientWidth = 840
       TabVisible = False
       object btnAddProduct: TButton
         Left = 8

@@ -4,12 +4,11 @@
     <PathDelim Value="\"/>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="51">
+    <Units Count="54">
       <Unit0>
         <Filename Value="BatteryDataServer.dpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <CursorPos X="6" Y="13"/>
+        <CursorPos X="20" Y="10"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -23,8 +22,8 @@
         <Filename Value="server.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="110"/>
-        <CursorPos X="3" Y="37"/>
+        <TopLine Value="26"/>
+        <CursorPos X="16" Y="34"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -112,10 +111,11 @@
       </Unit14>
       <Unit15>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\orm\mormot.orm.core.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4060"/>
-        <CursorPos X="17" Y="4072"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="2164"/>
+        <CursorPos X="24" Y="2172"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\..\Share\Dto\batterydto.pas"/>
@@ -219,8 +219,8 @@
       <Unit29>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\rest\mormot.rest.server.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="7570"/>
-        <CursorPos Y="7587"/>
+        <TopLine Value="3445"/>
+        <CursorPos X="17" Y="3456"/>
         <UsageCount Value="11"/>
       </Unit29>
       <Unit30>
@@ -240,8 +240,8 @@
       <Unit32>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.interfaces.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="7416"/>
-        <CursorPos Y="7619"/>
+        <TopLine Value="7504"/>
+        <CursorPos Y="7520"/>
         <UsageCount Value="10"/>
       </Unit32>
       <Unit33>
@@ -263,7 +263,7 @@
       <Unit35>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\db\mormot.db.raw.sqlite3.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="28" Y="4"/>
+        <TopLine Value="103"/>
         <UsageCount Value="10"/>
       </Unit35>
       <Unit36>
@@ -324,8 +324,8 @@
       <Unit44>
         <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\soa\mormot.soa.server.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="65"/>
-        <CursorPos X="3" Y="65"/>
+        <TopLine Value="1494"/>
+        <CursorPos Y="1510"/>
         <UsageCount Value="10"/>
       </Unit44>
       <Unit45>
@@ -371,32 +371,40 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit50>
+      <Unit51>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="103"/>
+        <CursorPos Y="118"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="..\services\product\productstorageimplementation.pas"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="212"/>
+        <CursorPos X="16" Y="217"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit52>
+      <Unit53>
+        <Filename Value="C:\fpcupsystems\stable324\ccr\mORMot2\src\core\mormot.core.variants.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="5154"/>
+        <CursorPos X="29" Y="5180"/>
+        <UsageCount Value="10"/>
+      </Unit53>
     </Units>
-    <JumpHistory Count="6" HistoryIndex="5">
+    <JumpHistory Count="2" HistoryIndex="1">
       <Position1>
-        <Filename Value="BatteryDataServer.dpr"/>
-        <Caret Line="26" Column="39" TopLine="7"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="120" TopLine="103"/>
       </Position1>
       <Position2>
-        <Filename Value="server.pas"/>
-        <Caret Line="41" TopLine="25"/>
+        <Filename Value="..\services\product\productserviceimplementation.pas"/>
+        <Caret Line="118" TopLine="103"/>
       </Position2>
-      <Position3>
-        <Filename Value="BatteryDataServer.dpr"/>
-        <Caret Line="31" TopLine="5"/>
-      </Position3>
-      <Position4>
-        <Filename Value="server.pas"/>
-        <Caret Line="6" Column="2"/>
-      </Position4>
-      <Position5>
-        <Filename Value="server.pas"/>
-        <Caret Line="124" TopLine="111"/>
-      </Position5>
-      <Position6>
-        <Filename Value="server.pas"/>
-        <Caret Line="37" Column="15" TopLine="26"/>
-      </Position6>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

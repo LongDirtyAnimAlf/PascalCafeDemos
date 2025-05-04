@@ -95,13 +95,17 @@ end;
 procedure TProductStorage.CopyDTOtoORM(const AProduct: TProduct; var OrmProduct: TOrmProduct);
 begin
   fMap.ToA(OrmProduct,AProduct);
-  if (AProduct.Documents.Count>0) then CopyObject(AProduct.Documents,OrmProduct.Documents);
+  // Might be needed or not
+  // To be checked
+  //if (AProduct.Documents.Count>0) then CopyObject(AProduct.Documents,OrmProduct.Documents);
 end;
 
 procedure TProductStorage.CopyORMtoDTO(const OrmProduct: TOrmProduct; var AProduct: TProduct);
 begin
   fMap.ToB(OrmProduct,AProduct);
-  if (OrmProduct.Documents.Count>0) then CopyObject(OrmProduct.Documents,AProduct.Documents);
+  // Might be needed or not
+  // To be checked
+  //if (OrmProduct.Documents.Count>0) then CopyObject(OrmProduct.Documents,AProduct.Documents);
 end;
 
 function TProductStorage.GetProductIDVersionOnly(const AProductCode: string): TOrmProduct;

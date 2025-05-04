@@ -16,7 +16,6 @@ type
 
   TProductDocument = class(TCollectionItem)
   private
-    function GetHash:ansistring;
     procedure SetPath(aPath:RawUTF8);
   protected
     fName              : RawUTF8;
@@ -25,12 +24,13 @@ type
     fTarget            : TDocumentTarget;
     fFileThumb         : TBlobber;
   public
-    function GetOwner:TProduct;reintroduce;
+    procedure SetHash;
+    function GetOwner  : TProduct;reintroduce;
     property FileThumb : TBlobber read fFileThumb write fFileThumb;
+    property Name      : RawUTF8 read fName;
   published
-    property Name      : RawUTF8 read fName;// write fName;
     property Path      : RawUTF8 read fPath write SetPath;
-    property Hash      : RawUTF8 read fHash;// write fHash;
+    property Hash      : RawUTF8 read fHash write fHash;
     property Target    : TDocumentTarget read fTarget write fTarget;
   end;
 
@@ -58,14 +58,14 @@ type
     constructor Create(ACollection: TCollection); override;
     destructor Destroy; override;
     procedure Init;
-    property Code              : RawUTF8 read fProductCode;
+    property Code          : RawUTF8 read fProductCode;
   published
-    property ProductCode       : RawUTF8 read fProductCode write fProductCode;
-    property Brand             : RawUTF8 read fBrand write fBrand;
-    property Model             : RawUTF8 read fModel write fModel;
-    property Documents         : TProductDocumentCollection read fDocuments write fDocuments;
-    property Thumb             : TBlobber read fThumb write fThumb;
-    property Version           : Int64 read fVersion write fVersion;
+    property ProductCode   : RawUTF8 read fProductCode write fProductCode;
+    property Brand         : RawUTF8 read fBrand write fBrand;
+    property Model         : RawUTF8 read fModel write fModel;
+    property Documents     : TProductDocumentCollection read fDocuments write fDocuments;
+    property Thumb         : TBlobber read fThumb write fThumb;
+    property Version       : Int64 read fVersion write fVersion;
   end;
 
   { TProductCollection }
@@ -108,32 +108,16 @@ begin
     result:=SysUtils.StrComp(PChar(pointer(TProduct(a).Model)),PChar(pointer(TProduct(b).Model)));
 end;
 
-function GetFileSize(const FileName: string): int64;
-Var
-  F : file of byte;
-begin
-  result:=0;
-  assign (F,FileName);
-  try
-    reset(F);
-    result:=filesize(F);
-  finally
-    close(F);
-  end;
-end;
-
-
 { TProductDocument }
 
-function TProductDocument.GetHash:ansistring;
+procedure TProductDocument.SetHash;
 var
   FS:int64;
   MD5Hash: TMD5Digest;
 begin
-  //FS:=GetTickCount64;
-  FS:=GetFileSize(fPath);
-  MD5Hash := MD5String(Format('%s'#1'%d'#2,[fPath,FS]));
-  result := MD5Print(MD5Hash);
+  FS:=GetTickCount64;
+  MD5Hash := MD5String(Format('%s'#1'%d'#2'%d'#3,[fPath,FS,fTarget]));
+  fHash := MD5Print(MD5Hash);
 end;
 
 procedure TProductDocument.SetPath(aPath:RawUTF8);
@@ -142,10 +126,9 @@ begin
   begin
     fPath:=aPath;
     if Length(fPath)>0 then
-    begin
-      fName:=ExtractFileName(fPath);
-      fHash:=GetHash;
-    end;
+      fName:=ExtractFileName(fPath)
+    else
+      fName:='';
   end;
 end;
 

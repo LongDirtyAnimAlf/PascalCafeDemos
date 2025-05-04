@@ -33,6 +33,7 @@ implementation
 uses
   mormot.core.variants,
   mormot.core.text,
+  mormot.core.json,
   mormot.core.rtti;
 
 function ObjectFieldsToVariant(const AObject: TObject; const Fieldinfo:RawUTF8; out TD:variant):boolean;
