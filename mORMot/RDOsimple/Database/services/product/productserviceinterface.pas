@@ -44,14 +44,12 @@ var
   pa           : PRttiCustomProp;
   TD2          : variant;
   count        : integer;
-  SkipField    : boolean;
-  json,magic         : RawUTF8;
+  BlobField    : boolean;
+  json,magic   : RawUTF8;
 begin
   result:=false;
 
   TDocVariantData(TD).Clear;
-  //TDocVariant.New(TD,[dvoValueDoNotNormalizeAsRawUtf8]);
-  //TDocVariant.New(TD2,[dvoValueDoNotNormalizeAsRawUtf8]);
 
   //rA := Rtti.RegisterClass(TProduct);
   rA := Rtti.RegisterClass(PClass(Product)^);
@@ -67,25 +65,25 @@ begin
         begin
           if (pa^.Value<>nil) and (pa^.Value.Info<>nil) then
           begin
-            SkipField:=false;
-            // Skip Blobs
-            if NOT SkipField then SkipField:=(pa^.Value.Info^.IsRawBlob);
-            if NOT SkipField then SkipField:=(pa^.Value.Info=TypeInfo(TBlobber));
+            BlobField:=false;
+            // Detect blobber fields
+            if NOT BlobField then BlobField:=(pa^.Value.Info^.IsRawBlob);
+            if NOT BlobField then BlobField:=(pa^.Value.Info=TypeInfo(TBlobber));
             // Skip certain collections
             if (pa^.Value.Info^.Kind=rkClass) then
             begin
               if (pa^.Value.ValueRtlClass=vcCollection) then
               begin
                 // Skip the document collection
-                if NOT SkipField then SkipField:=(pa^.Value.Info^.RttiClass^.RttiClass=TProductDocumentCollection);
+                if NOT BlobField then BlobField:=(pa^.Value.Info^.RttiClass^.RttiClass=TProductDocumentCollection);
               end;
             end;
-            if NOT SkipField then
+            if NOT BlobField then
             begin
               // Get fielddata as variant
               pa^.GetValueVariant(Product,TVarData(TD2), @JSON_[mDefault]);
               // Add requested fieldname and fielddata
-              TDocVariantData(TD).AddValue(pa^.Name,TD2);
+              _ObjAddProps([FieldInfo,TD2],TD);
               // Prevent memory leak
               TDocVariantData(TD2).Clear;
             end;
@@ -101,22 +99,25 @@ begin
       pa := rA.Props.Find(FieldInfo);
       if Assigned(pa) then
       begin
-        SkipField:=false;
+        BlobField:=false;
         // Detect blobber fields
-        if NOT SkipField then SkipField:=(pa^.Value.Info^.IsRawBlob);
-        if NOT SkipField then SkipField:=(pa^.Value.Info=TypeInfo(TBlobber));
-        if SkipField then
+        if NOT BlobField then BlobField:=(pa^.Value.Info^.IsRawBlob);
+        if NOT BlobField then BlobField:=(pa^.Value.Info=TypeInfo(TBlobber));
+        if BlobField then
         begin
           // Blob data needs to be converted into Base64 [with some exta magic]
           json:=pa^.GetValueText(Product);
           //magic:=BinToBase64WithMagic(json); // with magic
           magic:=BinToBase64(json); // without magic
-          TDocVariantData(TD).AddValueFromText(FieldInfo,magic);
+          //magic:=json;
+          // Add requested fieldname and fielddata
+          TD:=_ObjFast([FieldInfo,magic]);
         end
         else
         begin
           pa^.GetValueVariant(Product,TVarData(TD2), @JSON_[mDefault]);
-          TDocVariantData(TD).AddValue(FieldInfo,TD2);
+          // Add requested fieldname and fielddata
+          TD:=_ObjFast([FieldInfo,TD2]);
           // Prevent memory leak
           TDocVariantData(TD2).Clear;
         end;

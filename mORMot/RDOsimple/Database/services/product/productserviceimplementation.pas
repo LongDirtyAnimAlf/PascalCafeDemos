@@ -111,6 +111,7 @@ var
   FieldNames   : RawUTF8;
   indexer      : integer;
   FieldContent : RawUTF8;
+  BlobField    : boolean;
 begin
   Result := sePersistenceError;
 
@@ -122,6 +123,7 @@ begin
 
     Valid := DocVariantToObject(_Safe(FieldData)^,LocalProduct);
     if Valid then
+    //if false then
     begin
       // The blob data is transmitted as encoded base64 with some mORMot magic pre-amble
       // If a blobber is included, decode this data and set its value !!
@@ -140,7 +142,12 @@ begin
               pa := rA.Props.Find(Names[indexer]);
               if Assigned(pa) then
               begin
-                if (pa^.Prop^.TypeInfo = system.TypeInfo(TBlobber)) then
+                BlobField := false;
+                // Detect blobber fields
+                if NOT BlobField then BlobField:=(pa^.Value.Info^.IsRawBlob);
+                if NOT BlobField then BlobField:=(pa^.Value.Info=TypeInfo(TBlobber));
+                //if NOT BlobField then BlobField:=(pa^.Prop^.TypeInfo=TypeInfo(TBlobber));
+                if BlobField then
                 begin
                   FieldContent:=U[Names[indexer]];
                   //pa^.SetValueText(LocalProduct,BlobToRawBlob(FieldContent)); // in case of mormot magic
@@ -151,14 +158,16 @@ begin
           end;
         end;
       end;
+    end;
 
+    if Valid then
+    begin
       // Finally, save the data into the storage !
       FieldNames:=RawUtf8ArrayToCsv(TDocVariantData(FieldData).GetNames);
       if fStorage.UpdateProduct(LocalProduct,FieldNames) = stSuccess then
         Result := seSuccess
       else
         Result := sePersistenceError;
-
     end;
 
   finally
