@@ -34,6 +34,7 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    btnAddProduct1: TButton;
     btnConnectLocal: TButton;
     btnAddProduct: TButton;
     btnConnectRemote: TButton;

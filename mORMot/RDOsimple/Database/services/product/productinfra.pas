@@ -26,7 +26,6 @@ type
     fModel             : RawUTF8;
     fDocuments         : TProductDocumentCollection;
     fThumb             : RawBlob;
-    fHello             : RawUTF8;
     fVersion           : TRecordVersion;
   public
     procedure InternalCreate;override;
@@ -37,7 +36,6 @@ type
     property Model            : RawUTF8 read fModel write fModel;
     property Documents        : TProductDocumentCollection read fDocuments write fDocuments;
     property Thumb            : RawBlob read fThumb write fThumb;
-    property Hello             : RawUTF8 read fHello write fHello;
     property Version          : TRecordVersion read fVersion write fVersion;
   end;
 

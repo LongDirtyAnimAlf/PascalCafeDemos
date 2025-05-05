@@ -882,6 +882,16 @@ object Form1: TForm1
         Caption = 'Documents'
         TabOrder = 3
       end
+      object btnAddProduct1: TButton
+        Left = 32
+        Height = 53
+        Top = 256
+        Width = 137
+        Anchors = []
+        Caption = 'Add Product'
+        TabOrder = 4
+        OnClick = btnAddProductClick
+      end
     end
     object tsDetails: TTabSheet
       Caption = 'Details'

@@ -5,6 +5,7 @@ interface
 {$I mormot.defines.inc}
 
 uses
+  classes,
   mormot.core.base,
   mormot.core.interfaces,
   servicesshared,
@@ -25,87 +26,17 @@ type
     function ChangedProduct(const aProductCode:RawUTF8; const aVersion:Int64; out Changed:boolean): TServiceResult;
   end;
 
-  function ObjectFieldsToVariant(const AObject: TObject; const Fieldinfo:RawUTF8; out TD:variant):boolean;
   function ProductFieldsToVariant(const Product: TProduct; const Fieldinfo:RawUTF8; out TD:variant):boolean;
 
 implementation
 
 uses
+  mormot.core.data,
+  mormot.core.buffers,
   mormot.core.variants,
   mormot.core.text,
   mormot.core.json,
   mormot.core.rtti;
-
-function ObjectFieldsToVariant(const AObject: TObject; const Fieldinfo:RawUTF8; out TD:variant):boolean;
-var
-  rA           : TRttiCustom;
-  pa           : PRttiCustomProp;
-  TD2          : variant;
-  count        : integer;
-  SkipField    : boolean;
-begin
-  result:=false;
-
-  TDocVariantData(TD).Clear;
-
-  rA := Rtti.RegisterClass(PClass(AObject)^);
-  if Assigned(rA) then
-  begin
-    if Fieldinfo='*' then
-    begin
-      // All fields
-      // However, the fields are filtered: not the specific collections
-      pa := pointer(rA.Props.List);
-      count:=rA.Props.Count;
-      repeat
-        begin
-          if (pa^.Value<>nil) and (pa^.Value.Info<>nil) then
-          begin
-            SkipField:=false;
-            // Skip certain collections
-            if (pa^.Value.Info^.Kind=rkClass) then
-            begin
-              if (pa^.Value.ValueRtlClass=vcCollection) then
-              begin
-                // Skip the LiveData collection
-                //if NOT SkipField then SkipField:=(pa^.Value.Info^.RttiClass^.RttiClass=TNewLiveDataCollection);
-                // Skip the ThresholdData collection
-                //if NOT SkipField then SkipField:=(pa^.Value.Info^.RttiClass^.RttiClass=TThresholdDataCollection);
-              end;
-            end;
-            if NOT SkipField then
-            begin
-              // Get fielddata as variant
-              pa^.GetValueVariant(AObject,TVarData(TD2), @JSON_[mDefault]);
-              // Add requested fieldname and fielddata
-              TDocVariantData(TD).AddValue(pa^.Name,TD2);
-              // Prevent memory leak
-              TDocVariantData(TD2).Clear;
-            end;
-          end;
-        end;
-        inc(pa);
-        dec(count);
-      until count = 0;
-    end
-    else
-    begin
-      // Single field
-      pa := rA.Props.Find(FieldInfo);
-      if Assigned(pa) then
-      begin
-        // Get fielddata as variant
-        pa^.GetValueVariant(AObject,TVarData(TD2), @JSON_[mDefault]);
-        // Add requested fieldname and fielddata
-        TDocVariantData(TD).AddValue(FieldInfo,TD2);
-        // Prevent memory leak
-        TDocVariantData(TD2).Clear;
-      end;
-    end;
-
-    if (TDocVariantData(TD).Count>0) then result:=true;
-  end;
-end;
 
 function ProductFieldsToVariant(const Product: TProduct; const Fieldinfo:RawUTF8; out TD:variant):boolean;
 var
@@ -114,10 +45,13 @@ var
   TD2          : variant;
   count        : integer;
   SkipField    : boolean;
+  json,magic         : RawUTF8;
 begin
   result:=false;
 
   TDocVariantData(TD).Clear;
+  //TDocVariant.New(TD,[dvoValueDoNotNormalizeAsRawUtf8]);
+  //TDocVariant.New(TD2,[dvoValueDoNotNormalizeAsRawUtf8]);
 
   //rA := Rtti.RegisterClass(TProduct);
   rA := Rtti.RegisterClass(PClass(Product)^);
@@ -167,12 +101,25 @@ begin
       pa := rA.Props.Find(FieldInfo);
       if Assigned(pa) then
       begin
-        // Get fielddata as variant
-        pa^.GetValueVariant(Product,TVarData(TD2), @JSON_[mDefault]);
-        // Add requested fieldname and fielddata
-        TDocVariantData(TD).AddValue(FieldInfo,TD2);
-        // Prevent memory leak
-        TDocVariantData(TD2).Clear;
+        SkipField:=false;
+        // Detect blobber fields
+        if NOT SkipField then SkipField:=(pa^.Value.Info^.IsRawBlob);
+        if NOT SkipField then SkipField:=(pa^.Value.Info=TypeInfo(TBlobber));
+        if SkipField then
+        begin
+          // Blob data needs to be converted into Base64 [with some exta magic]
+          json:=pa^.GetValueText(Product);
+          //magic:=BinToBase64WithMagic(json); // with magic
+          magic:=BinToBase64(json); // without magic
+          TDocVariantData(TD).AddValueFromText(FieldInfo,magic);
+        end
+        else
+        begin
+          pa^.GetValueVariant(Product,TVarData(TD2), @JSON_[mDefault]);
+          TDocVariantData(TD).AddValue(FieldInfo,TD2);
+          // Prevent memory leak
+          TDocVariantData(TD2).Clear;
+        end;
       end;
     end;
 

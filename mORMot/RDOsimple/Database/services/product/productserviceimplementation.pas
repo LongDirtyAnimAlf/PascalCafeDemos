@@ -33,6 +33,8 @@ type
 implementation
 
 uses
+  mormot.core.rtti,
+  mormot.core.buffers,
   mormot.core.text,
   mormot.core.variants,
   mormot.core.json;
@@ -102,28 +104,63 @@ end;
 
 function TProductService.UpdateProduct(const aProductCode:RawUTF8; const FieldData:Variant): TServiceResult;
 var
+  rA           : TRttiCustom;
+  pa           : PRttiCustomProp;
   Valid        : boolean;
   LocalProduct : TProduct;
   FieldNames   : RawUTF8;
+  indexer      : integer;
+  FieldContent : RawUTF8;
 begin
   Result := sePersistenceError;
 
   if (TDocVariantData(FieldData).Count=0) then exit;
 
-  Valid := false;
-
   LocalProduct := TProduct.Create(nil);
   try
     LocalProduct.ProductCode:=aProductCode;
+
     Valid := DocVariantToObject(_Safe(FieldData)^,LocalProduct);
     if Valid then
     begin
+      // The blob data is transmitted as encoded base64 with some mORMot magic pre-amble
+      // If a blobber is included, decode this data and set its value !!
+
+      rA := Rtti.RegisterClass(PClass(LocalProduct)^);
+
+      if Assigned(rA) then
+      begin
+        with _Safe(FieldData)^ do
+        begin
+          for indexer := 0 to Count-1 do
+          begin
+            //FieldContent:=U[Names[indexer]];
+            //if IsBase64(FieldContent) then
+            begin
+              pa := rA.Props.Find(Names[indexer]);
+              if Assigned(pa) then
+              begin
+                if (pa^.Prop^.TypeInfo = system.TypeInfo(TBlobber)) then
+                begin
+                  FieldContent:=U[Names[indexer]];
+                  //pa^.SetValueText(LocalProduct,BlobToRawBlob(FieldContent)); // in case of mormot magic
+                  pa^.SetValueText(LocalProduct,Base64ToBin(FieldContent)); // normal base64
+                end;
+              end;
+            end;
+          end;
+        end;
+      end;
+
+      // Finally, save the data into the storage !
       FieldNames:=RawUtf8ArrayToCsv(TDocVariantData(FieldData).GetNames);
       if fStorage.UpdateProduct(LocalProduct,FieldNames) = stSuccess then
         Result := seSuccess
       else
         Result := sePersistenceError;
+
     end;
+
   finally
     LocalProduct.Free;
   end;
