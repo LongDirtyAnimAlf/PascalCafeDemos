@@ -1,4 +1,4 @@
-program BatteryDataServer;
+program ProductDataServer;
 
 {$APPTYPE CONSOLE}
 

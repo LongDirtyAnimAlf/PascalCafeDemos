@@ -9,7 +9,7 @@ uses
   servicesshared;
 
 {$ifdef FPC_EXTRECORDRTTI}
-  {$rtti explicit fields([vcPublic])} // mantadory :(
+  {$rtti explicit fields([vcPublic])} // mandatory :(
 {$endif FPC_EXTRECORDRTTI}
 
 type

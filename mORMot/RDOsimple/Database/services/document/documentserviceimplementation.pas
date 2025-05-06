@@ -26,7 +26,7 @@ type
 implementation
 
 {
-******************************** TBatteryService ********************************
+******************************** TDocumentService ********************************
 }
 constructor TDocumentService.Create(AStorage: IInvokable);
 begin

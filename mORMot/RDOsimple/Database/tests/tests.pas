@@ -16,7 +16,7 @@ uses
   mormot.core.test;
 
 {$ifdef FPC_EXTRECORDRTTI}
-  {$rtti explicit fields([vcPublic])} // mantadory :(
+  {$rtti explicit fields([vcPublic])} // mandatory :(
 {$endif FPC_EXTRECORDRTTI}
 
 type
@@ -199,7 +199,7 @@ begin
   // ******************************
   // Test direct access of database
 
-  DeleteFile(BATTERY_DATABASE_FILENAME);
+  DeleteFile(PRODUCT_DATABASE_FILENAME);
   ServiceServer := TServiceServer.Create({WithHTTPServer=}False);
 
   ServiceServer.Services.Resolve(IProductService, ProductService);
@@ -217,7 +217,7 @@ begin
   // ****************************************
   // Test database access through http server
 
-  DeleteFile(BATTERY_DATABASE_FILENAME);
+  DeleteFile(PRODUCT_DATABASE_FILENAME);
   ServiceServer := TServiceServer.Create({WithHTTPServer=}True);
   RestClient := TRestHttpClient.Create('localhost', HTTP_PORT, ServiceServer.Model);
   {$ifdef USE_JWT}
@@ -297,7 +297,7 @@ end;
 
 
 begin
-  DeleteFile(BATTERY_DATABASE_FILENAME);
+  DeleteFile(PRODUCT_DATABASE_FILENAME);
 
   PreparedServer:=TServer.Create({HTTPServer=}false);
   with PreparedServer AS TServer do
@@ -315,7 +315,7 @@ begin
   ProductService:=nil;
   PreparedServer.Free;
 
-  DeleteFile(BATTERY_DATABASE_FILENAME);
+  DeleteFile(PRODUCT_DATABASE_FILENAME);
 
   PreparedServer := TServer.Create({HTTPServer=}true);
   PreparedClient:=TClient.Create('localhost');

@@ -108,17 +108,20 @@ Debug/
 *.patch
 *.diff
 *.log
+*.db3
+*.lps
+
 backup/
 
 lib/
 bin/
 
 libs/
-# bins/
-# !bins/**/*.db3
+bins/
 
-/bins/**/*
-!/bins/**/*.db3
+# !bins/**/*.db3
+# /bins/**/*
+# !/bins/**/*.db3
 
 .generated_files/
 _ext/

@@ -117,19 +117,21 @@ begin
 
   if (TDocVariantData(FieldData).Count=0) then exit;
 
+  // Create a local product to store the variant data
   LocalProduct := TProduct.Create(nil);
   try
     LocalProduct.ProductCode:=aProductCode;
 
-    Valid := DocVariantToObject(_Safe(FieldData)^,LocalProduct);
+    rA := Rtti.RegisterClass(PClass(LocalProduct)^);
+
+    // Convert/store then variant data into the product
+    Valid := DocVariantToObject(_Safe(FieldData)^,LocalProduct, rA);
+
     if Valid then
     //if false then
     begin
-      // The blob data is transmitted as encoded base64 with some mORMot magic pre-amble
+      // The blob data is transmitted as encoded base64 [possibly with some mORMot magic pre-amble]
       // If a blobber is included, decode this data and set its value !!
-
-      rA := Rtti.RegisterClass(PClass(LocalProduct)^);
-
       if Assigned(rA) then
       begin
         with _Safe(FieldData)^ do

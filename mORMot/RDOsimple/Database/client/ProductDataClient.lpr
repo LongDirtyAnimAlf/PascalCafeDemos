@@ -1,4 +1,4 @@
-program BatteryDataClient;
+program ProductDataClient;
 
 {$mode objfpc}{$H+}
 

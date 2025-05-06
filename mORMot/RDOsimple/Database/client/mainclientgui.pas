@@ -609,7 +609,7 @@ begin
       // Check for changes.
       if (SharedmORMotData.ChangedProduct(SelectedProduct,RefreshNeeded) AND RefreshNeeded) then
       begin
-        // Due to version tracking, we now know that the battery has changed.
+        // Due to version tracking, we now know that the product has changed.
         // So, get the new data from the server !!
         SharedmORMotData.GetProduct(SelectedProduct);
       end;

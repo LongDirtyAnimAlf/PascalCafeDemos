@@ -56,8 +56,8 @@ type
     property HttpServer     : TRestHttpServer read fHttpServer;
     property TableMustache  : TSynMustache read fTableMustache;
   published
-    // This method return a table of batteries in case the SOA methods are protected from outside access
-    procedure AllBatteries(Ctxt: TRestServerUriContext);
+    // This method return a table of products in case the SOA methods are protected from outside access
+    procedure AllProducts(Ctxt: TRestServerUriContext);
   end;
 
   TServer = class(TObject)
@@ -126,10 +126,10 @@ begin
   inherited CreateWithOwnModel([],false);
   {$endif}
 
-  //ServiceMethodByPassAuthentication('AllBatteries'); // ByPass authentication for a single method [by name]
+  //ServiceMethodByPassAuthentication('AllProducts'); // ByPass authentication for a single method [by name]
   ServiceMethodByPassAuthentication(''); // ByPass authentication for all methods
 
-  fProductStorage := TProductStorage.Create(nil,BATTERY_DATABASE_FILENAME);
+  fProductStorage := TProductStorage.Create(nil,PRODUCT_DATABASE_FILENAME);
   ProductService := TProductService.Create(fProductStorage);
   with ServiceDefine(ProductService, [IProductService], EXAMPLE_CONTRACT) do
   begin
@@ -160,12 +160,9 @@ begin
     fHttpServer.HttpServer.OnAfterRequest:=AfterRequest;
     fHttpServer.AccessControlAllowOrigin := '*';
     fHttpServer.Route.Get('/info', 'root/timestamp/info');
-    fHttpServer.Route.Get('/batteries', '/root/ProductService.GetAllProducts');
-    fHttpServer.Route.Get('/battery/<id>', '/root/ProductService.GetProductByCode?aCode=<id>');
-    fHttpServer.Route.Get('/battery/<id>/image', '/root/ProductService.GetProductImageByCode?aCode=<id>');
-    //fHttpServer.Route.Get('/battery/<code>/rundata/<id>', '/root/ProductService.GetProductByCode?aCode=<id>');
-    //fHttpServer.Route.Get('/battery/<id>/picture', '/root/ProductService.newpic?id=<id>&pic=');
-    //fHttpServer.Route.Get('/battery/<id>/picture/<pic>', '/root/ProductService.newpic?pic=<pic>&id=<id>');
+    fHttpServer.Route.Get('/productss', '/root/ProductService.GetAllProducts');
+    fHttpServer.Route.Get('/product/<id>', '/root/ProductService.GetProductByCode?aCode=<id>');
+    fHttpServer.Route.Get('/product/<id>/image', '/root/ProductService.GetProductImageByCode?aCode=<id>');
 
     fTableMustache := TSynMustache.Parse(
     '<!doctype html>'+
@@ -174,15 +171,15 @@ begin
       '<meta charset="utf-8">'+
       '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">'+
       '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">'+
-      '<title Mustache renderer of battery database></title>'+
+      '<title Mustache renderer of product database></title>'+
     '</head>'+
     '<body>'+
-      'My Batteries:'#13#10+
+      'My Products:'#13#10+
       '<table class="table table-striped table-bordered table-sm">'+
       '<thead class="thead-dark">'+
       '<tr id="colHeaders">'+
       '<th scope="col">#</th>'+
-      '<th scope="col">Code</th>'+
+      '<th scope="col">ProductCode</th>'+
       '<th scope="col">Brand</th>'+
       '<th scope="col">Type</th>'+
       '<th scope="col" style="width: 140px">Picture</th>'+
@@ -193,9 +190,9 @@ begin
       #$A'{{#AProducts}}'+
       '<tr>'+
       '<th scope="row">{{-index}}</th>'+
-      '<td>{{B_code}}</td>'+
-      '<td>{{B_name}}</td>'+
-      '<td>{{B_type}}</td>'+
+      '<td>{{ProductCode}}</td>'+
+      '<td>{{Brand}}</td>'+
+      '<td>{{Model}}</td>'+
       '<td><img src="data:image/bmp;base64,{{Thumb}}"></td>'+
       '<td><a href="#" id="getDetails">Details</a></td>'+
       '</tr>'+
@@ -251,7 +248,7 @@ begin
   result:=HTTP_NONE;
 end;
 
-procedure TServiceServer.AllBatteries(Ctxt: TRestServerUriContext);
+procedure TServiceServer.AllProducts(Ctxt: TRestServerUriContext);
 var
   Products       : TProductCollection;
   json, html     : RawUtf8;

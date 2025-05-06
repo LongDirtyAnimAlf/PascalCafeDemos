@@ -8,7 +8,7 @@ uses
   documentdom;
 
 {$ifdef FPC_EXTRECORDRTTI}
-  {$rtti explicit fields([vcPublic])} // mantadory :(
+  {$rtti explicit fields([vcPublic])} // mandatory :(
 {$endif FPC_EXTRECORDRTTI}
 
 type
@@ -80,7 +80,7 @@ type
     property Item[Index: integer]: TProduct read GetItem;
     function GetProductData(ProductIndex:integer):TProduct;
     function Add: TProduct;
-    function AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aBattery:TProduct): boolean;
+    function AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aProduct:TProduct): boolean;
   end;
 
   function CompareProductCode(const a, b: TCollectionItem): Integer;
@@ -234,33 +234,27 @@ begin
   Result := inherited Add as TProduct;
 end;
 
-function TProductCollection.AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aBattery:TProduct): boolean;
+function TProductCollection.AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aProduct:TProduct): boolean;
 var
-  BatteryRunner:TProduct;
+  ProductRunner:TProduct;
 begin
   result:=true;
-  aBattery:=nil;
-  for TCollectionItem(BatteryRunner) in Self do
+  aProduct:=nil;
+  for TCollectionItem(ProductRunner) in Self do
   begin
-    if (BatteryRunner.ProductCode=ABC) then
+    if (ProductRunner.ProductCode=ABC) then
     begin
-      aBattery:=BatteryRunner;
+      aProduct:=ProductRunner;
       result:=false;
       break;
     end;
   end;
-  if NOT Assigned(aBattery) then if AddIfNotFound then
+  if NOT Assigned(aProduct) then if AddIfNotFound then
   begin
-    aBattery := Add;
-    aBattery.ProductCode:=ABC;
+    aProduct := Add;
+    aProduct.ProductCode:=ABC;
   end;
 end;
-
-initialization
-  //Rtti.RegisterClass(TBatteryDetails);
-  //Rtti.RegisterClass(TBatteryWarnings);
-  //Rtti.RegisterClass(TBatteryDisposal);
-  //Rtti.RegisterClass(TBatteryRechargeable);
 
 end.
 

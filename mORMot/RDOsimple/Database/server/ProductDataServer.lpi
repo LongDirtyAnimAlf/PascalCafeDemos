@@ -12,7 +12,7 @@
         <CompatibilityMode Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <Title Value="BatteryDataServer"/>
+      <Title Value="ProductDataServer"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
     </General>
@@ -23,7 +23,7 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="..\bins\$NameOnly($(ProjFile))\$(TargetCPU)-$(TargetOS)\$NameOnly($(ProjFile))"/>
+            <Filename Value="..\bins\$NameOnly($(ProjFile))\$(TargetCPU)-$(TargetOS)\ProductDataServer"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\services"/>
@@ -68,46 +68,22 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="2">
       <Unit0>
-        <Filename Value="BatteryDataServer.dpr"/>
+        <Filename Value="ProductDataServer.dpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="data.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit1>
-      <Unit2>
         <Filename Value="server.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit2>
-      <Unit3>
-        <Filename Value="DomRepositoryInterfaces.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit3>
-      <Unit4>
-        <Filename Value="InfraRepositoryImplementation.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit4>
-      <Unit5>
-        <Filename Value="DomServiceImplementation.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit5>
-      <Unit6>
-        <Filename Value="DomServiceInterfaces.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit6>
-      <Unit7>
-        <Filename Value="DomTypes.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit7>
+      </Unit1>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="..\bins\$NameOnly($(ProjFile))\$(TargetCPU)-$(TargetOS)\$NameOnly($(ProjFile))"/>
+      <Filename Value="..\bins\$NameOnly($(ProjFile))\$(TargetCPU)-$(TargetOS)\ProductDataServer"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);..\services"/>
@@ -129,11 +105,7 @@
       <LinkSmart Value="True"/>
     </Linking>
     <Other>
-      <CustomOptions Value="-dBorland
--dVer150
--dDelphi7
--dCompiler6_Up
--dPUREMORMOT2"/>
+      <CustomOptions Value="-dPUREMORMOT2"/>
     </Other>
   </CompilerOptions>
   <Debugging>

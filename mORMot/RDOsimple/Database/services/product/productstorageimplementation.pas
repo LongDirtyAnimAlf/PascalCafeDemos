@@ -114,7 +114,7 @@ var
   res          : array[0..1] of RawUtf8;
   where        : RawUtf8;
 begin
-  // Get the ORM-ID and ORM-Version of the Battery from the server
+  // Get the ORM-ID and ORM-Version of the Product from the server
   where := FormatSql(MAINFIELD+' = ?', [], [AProductCode]);
   if FRestOrm.MultiFieldValue(TOrmProduct,[ROWID_TXT,TOrmProduct.OrmProps.RecordVersionField.Name],res,where) then
   begin
