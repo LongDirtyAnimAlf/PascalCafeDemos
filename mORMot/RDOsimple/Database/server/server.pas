@@ -160,7 +160,8 @@ begin
     fHttpServer.HttpServer.OnAfterRequest:=AfterRequest;
     fHttpServer.AccessControlAllowOrigin := '*';
     fHttpServer.Route.Get('/info', 'root/timestamp/info');
-    fHttpServer.Route.Get('/productss', '/root/ProductService.GetAllProducts');
+    fHttpServer.Route.Get('/allproducts', '/root/AllProducts');
+    fHttpServer.Route.Get('/products', '/root/ProductService.GetAllProducts');
     fHttpServer.Route.Get('/product/<id>', '/root/ProductService.GetProductByCode?aCode=<id>');
     fHttpServer.Route.Get('/product/<id>/image', '/root/ProductService.GetProductImageByCode?aCode=<id>');
 
@@ -179,7 +180,7 @@ begin
       '<thead class="thead-dark">'+
       '<tr id="colHeaders">'+
       '<th scope="col">#</th>'+
-      '<th scope="col">ProductCode</th>'+
+      '<th scope="col">Code</th>'+
       '<th scope="col">Brand</th>'+
       '<th scope="col">Type</th>'+
       '<th scope="col" style="width: 140px">Picture</th>'+
