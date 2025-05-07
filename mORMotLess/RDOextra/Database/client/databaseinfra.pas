@@ -317,7 +317,7 @@ begin
   begin
     LocalProduct:=AProductDocument.GetOwner;
     Documents.AddOrUpdate(AProductDocument.Hash,true,Document);
-    Document.SetPath(AProductDocument.Path,True);
+    Document.SetData(AProductDocument.Path,True);
     Document.ProductCode:=LocalProduct.ProductCode;
     Document.Hash:=AProductDocument.Hash;
     AProductDocument.FileThumb:=Document.FileThumb;

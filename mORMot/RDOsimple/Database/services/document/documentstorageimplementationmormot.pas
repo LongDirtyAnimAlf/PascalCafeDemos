@@ -123,7 +123,8 @@ begin
   JSON:=FRestOrm.OneFieldValue(TOrmDocument,'FileThumb','Hash = ?',[ADocument.Hash]);
   if Length(JSON)>0 then
   begin
-    ADocument.SetThumb(BlobToRawBlob(pointer(JSON)));
+    //Copy retrieved thumb into document
+    ADocument.FileThumb:=BlobToRawBlob(pointer(JSON));
     Result := stSuccess;
   end;
 end;

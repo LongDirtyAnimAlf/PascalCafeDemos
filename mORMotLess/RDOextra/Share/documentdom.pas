@@ -17,25 +17,24 @@ type
 
   TDocument = class(TCollectionItem)
   private
-    fProductCode       : RawUTF8;
-    fHash              : RawUTF8;
-    fName              : RawUTF8;
-    fPath              : RawUTF8;
-    fSize              : integer;
-    fFileThumb         : TBlobber;
-    fFileContents      : TBlobber;
+    fProductCode          : RawUTF8;
+    fHash                 : RawUTF8;
+    fName                 : RawUTF8;
+    fPath                 : RawUTF8;
+    fSize                 : integer;
+    fFileThumb            : TBlobber;
+    fFileContents         : TBlobber;
   public
     procedure Assign(Source: TPersistent); override;
-    procedure SetPath(aValue:RawUTF8;SetFileContents:boolean=false);
-    procedure SetThumb(aValue:TBlobber);
+    procedure SetData(aPath:RawUTF8;SetFileContents:boolean=false);
+    property Name         : RawUTF8 read fName;// write fName;
   published
     property ProductCode  : RawUTF8 read fProductCode write fProductCode;
     property Hash         : RawUTF8 read fHash write fHash;
-    property Name         : RawUTF8 read fName;// write fName;
-    property Path         : RawUTF8 read fPath;// write fPath;
-    property Size         : integer read fSize;// write fSize;
-    property FileThumb    : TBlobber read fFileThumb;// write fFileThumb;
-    property FileContents : TBlobber read fFileContents;// write fFileContents;
+    property Path         : RawUTF8 read fPath write fPath;
+    property Size         : integer read fSize write fSize;
+    property FileThumb    : TBlobber read fFileThumb write fFileThumb;
+    property FileContents : TBlobber read fFileContents write fFileContents;
   end;
 
   TDocumentCollection = class(TCollection)
@@ -148,7 +147,7 @@ begin
   end;
 end;
 
-procedure TDocument.SetPath(aValue:RawUTF8;SetFileContents:boolean);
+procedure TDocument.SetData(aPath:RawUTF8;SetFileContents:boolean);
 var
   Pic:TMemoryStream;
   Reader: TFPCustomImageReader;
@@ -157,7 +156,7 @@ var
   AWidth, AHeight: word;
   area: TRect;
 begin
-  fPath:=aValue;
+  fPath:=aPath;
   fName:=ExtractFileName(fPath);
 
   if (NOT SetFileContents) then exit;
@@ -228,11 +227,6 @@ begin
   finally
     FreeAndNil(Pic);
   end;
-end;
-
-procedure TDocument.SetThumb(aValue:TBlobber);
-begin
-  fFileThumb:=aValue;
 end;
 
 constructor TDocumentCollection.Create;

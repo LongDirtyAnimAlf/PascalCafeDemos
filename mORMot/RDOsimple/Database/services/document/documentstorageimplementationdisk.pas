@@ -59,7 +59,7 @@ begin
     if SysUtils.FileExists(aFile) then
     begin
       // Retrieve the file
-      ADocument.SetPath(aFile,true);
+      ADocument.SetData(aFile,true);
       Result := TStorageResult.stSuccess;
     end;
   finally

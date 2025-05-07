@@ -261,7 +261,7 @@ begin
     LocalProduct:=AProductDocument.GetOwner;
     Document:=TDocument.Create(nil);
     try
-      Document.SetPath(AProductDocument.Path,True);
+      Document.SetData(AProductDocument.Path,True);
       Document.ProductCode:=LocalProduct.ProductCode;
       Document.Hash:=AProductDocument.Hash;
       result:=(DocumentService.AddDocument(Document) = seSuccess);
