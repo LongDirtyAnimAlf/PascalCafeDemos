@@ -277,9 +277,7 @@ begin
             aImage:=TImage(aDropTarget);
             aTarget:=GetPictureTargetFromName(aImage.Name);
             SelectedProduct.Documents.AddOrUpdate(aTarget,True,ProductDocument);
-            ProductDocument.Path:=locFileName;
-            ProductDocument.Target:=aTarget;
-            ProductDocument.SetHash;
+            ProductDocument.SetData(locFileName,aTarget);
             result:=SharedmORMotData.AddDocument(ProductDocument);
             if result then
             begin
@@ -315,8 +313,7 @@ begin
           if (aDropTarget=ListViewProductDocs) then
           begin
             ProductDocument:=SelectedProduct.Documents.Add;
-            ProductDocument.Path:=locFileName;
-            ProductDocument.Target:=TDocumentTarget.dtUnknown;
+            ProductDocument.SetData(locFileName,TDocumentTarget.dtUnknown);
             result:=SharedmORMotData.AddDocument(ProductDocument);
             if result then
             begin

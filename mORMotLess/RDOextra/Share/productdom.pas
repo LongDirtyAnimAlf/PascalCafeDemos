@@ -8,7 +8,7 @@ uses
   documentdom;
 
 {$ifdef FPC_EXTRECORDRTTI}
-  {$rtti explicit fields([vcPublic])} // mantadory :(
+  {$rtti explicit fields([vcPublic])} // mandatory :(
 {$endif FPC_EXTRECORDRTTI}
 
 type
@@ -16,8 +16,8 @@ type
 
   TProductDocument = class(TCollectionItem)
   private
-    function GetHash:ansistring;
     procedure SetPath(aPath:RawUTF8);
+    procedure SetHash;
   protected
     fName              : RawUTF8;
     fPath              : RawUTF8;
@@ -25,12 +25,13 @@ type
     fTarget            : TDocumentTarget;
     fFileThumb         : TBlobber;
   public
-    function GetOwner:TProduct;reintroduce;
+    procedure SetData(aPath:RawUTF8; aTarget:TDocumentTarget);
+    function GetOwner  : TProduct;reintroduce;
     property FileThumb : TBlobber read fFileThumb write fFileThumb;
+    property Name      : RawUTF8 read fName;
   published
-    property Name      : RawUTF8 read fName;// write fName;
     property Path      : RawUTF8 read fPath write SetPath;
-    property Hash      : RawUTF8 read fHash;// write fHash;
+    property Hash      : RawUTF8 read fHash write fHash;
     property Target    : TDocumentTarget read fTarget write fTarget;
   end;
 
@@ -95,7 +96,7 @@ type
     property Item[Index: integer]: TProduct read GetItem;
     function GetProductData(ProductIndex:integer):TProduct;
     function Add: TProduct;
-    function AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aBattery:TProduct): boolean;
+    function AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aProduct:TProduct): boolean;
   end;
 
   function CompareProductCode(const a, b: TCollectionItem): Integer;
@@ -123,32 +124,23 @@ begin
     result:=SysUtils.StrComp(PChar(pointer(TProduct(a).Model)),PChar(pointer(TProduct(b).Model)));
 end;
 
-function GetFileSize(const FileName: string): int64;
-Var
-  F : file of byte;
-begin
-  result:=0;
-  assign (F,FileName);
-  try
-    reset(F);
-    result:=filesize(F);
-  finally
-    close(F);
-  end;
-end;
-
-
 { TProductDocument }
 
-function TProductDocument.GetHash:ansistring;
+procedure TProductDocument.SetHash;
 var
   FS:int64;
   MD5Hash: TMD5Digest;
 begin
-  //FS:=GetTickCount64;
-  FS:=GetFileSize(fPath);
-  MD5Hash := MD5String(Format('%s'#1'%d'#2,[fPath,FS]));
-  result := MD5Print(MD5Hash);
+  FS:=GetTickCount64;
+  MD5Hash := MD5String(Format('%s'#1'%d'#2'%d'#3,[fPath,FS,fTarget]));
+  fHash := MD5Print(MD5Hash);
+end;
+
+procedure TProductDocument.SetData(aPath:RawUTF8; aTarget:TDocumentTarget);
+begin
+  Path:=aPath;
+  Target:=aTarget;
+  SetHash;
 end;
 
 procedure TProductDocument.SetPath(aPath:RawUTF8);
@@ -157,10 +149,9 @@ begin
   begin
     fPath:=aPath;
     if Length(fPath)>0 then
-    begin
-      fName:=ExtractFileName(fPath);
-      fHash:=GetHash;
-    end;
+      fName:=ExtractFileName(fPath)
+    else
+      fName:='';
   end;
 end;
 
@@ -275,33 +266,27 @@ begin
   Result := inherited Add as TProduct;
 end;
 
-function TProductCollection.AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aBattery:TProduct): boolean;
+function TProductCollection.AddOrUpdate(const ABC:RawUTF8; const AddIfNotFound:boolean; out aProduct:TProduct): boolean;
 var
-  BatteryRunner:TProduct;
+  ProductRunner:TProduct;
 begin
   result:=true;
-  aBattery:=nil;
-  for TCollectionItem(BatteryRunner) in Self do
+  aProduct:=nil;
+  for TCollectionItem(ProductRunner) in Self do
   begin
-    if (BatteryRunner.ProductCode=ABC) then
+    if (ProductRunner.ProductCode=ABC) then
     begin
-      aBattery:=BatteryRunner;
+      aProduct:=ProductRunner;
       result:=false;
       break;
     end;
   end;
-  if NOT Assigned(aBattery) then if AddIfNotFound then
+  if NOT Assigned(aProduct) then if AddIfNotFound then
   begin
-    aBattery := Add;
-    aBattery.ProductCode:=ABC;
+    aProduct := Add;
+    aProduct.ProductCode:=ABC;
   end;
 end;
-
-initialization
-  //Rtti.RegisterClass(TBatteryDetails);
-  //Rtti.RegisterClass(TBatteryWarnings);
-  //Rtti.RegisterClass(TBatteryDisposal);
-  //Rtti.RegisterClass(TBatteryRechargeable);
 
 end.
 

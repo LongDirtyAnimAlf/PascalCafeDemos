@@ -6,7 +6,7 @@ const
   HTTP_PORT = '11111';
   HTTP_URL = '192.168.2.12';  
   EXAMPLE_CONTRACT = 'MyContractName';
-  BATTERY_DATABASE_FILENAME = 'hallo1.db3';
+  PRODUCT_DATABASE_FILENAME = 'products.db3';
   DOCUMENT_DATABASE_FILENAME = 'docs.db3';
   SECRET_KEY = 'secretjwtkey'; // Shared JWT secret known by both client and server
 

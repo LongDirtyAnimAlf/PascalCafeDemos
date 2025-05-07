@@ -17,6 +17,7 @@ type
   TProductDocument = class(TCollectionItem)
   private
     procedure SetPath(aPath:RawUTF8);
+    procedure SetHash;
   protected
     fName              : RawUTF8;
     fPath              : RawUTF8;
@@ -24,7 +25,7 @@ type
     fTarget            : TDocumentTarget;
     fFileThumb         : TBlobber;
   public
-    procedure SetHash;
+    procedure SetData(aPath:RawUTF8; aTarget:TDocumentTarget);
     function GetOwner  : TProduct;reintroduce;
     property FileThumb : TBlobber read fFileThumb write fFileThumb;
     property Name      : RawUTF8 read fName;
@@ -118,6 +119,13 @@ begin
   FS:=GetTickCount64;
   MD5Hash := MD5String(Format('%s'#1'%d'#2'%d'#3,[fPath,FS,fTarget]));
   fHash := MD5Print(MD5Hash);
+end;
+
+procedure TProductDocument.SetData(aPath:RawUTF8; aTarget:TDocumentTarget);
+begin
+  Path:=aPath;
+  Target:=aTarget;
+  SetHash;
 end;
 
 procedure TProductDocument.SetPath(aPath:RawUTF8);

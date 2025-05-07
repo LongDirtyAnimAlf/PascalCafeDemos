@@ -283,8 +283,7 @@ begin
             aImage:=TImage(aDropTarget);
             aTarget:=GetPictureTargetFromName(aImage.Name);
             SelectedProduct.Documents.AddOrUpdate(aTarget,True,ProductDocument);
-            ProductDocument.Path:=locFileName;
-            ProductDocument.Target:=aTarget;
+            ProductDocument.SetData(locFileName,aTarget);
             result:=SharedmORMotData.AddDocument(ProductDocument);
             if result then
             begin
@@ -320,8 +319,7 @@ begin
           if (aDropTarget=ListViewProductDocs) then
           begin
             ProductDocument:=SelectedProduct.Documents.Add;
-            ProductDocument.Path:=locFileName;
-            ProductDocument.Target:=TDocumentTarget.dtUnknown;
+            ProductDocument.SetData(locFileName,TDocumentTarget.dtUnknown);
             result:=SharedmORMotData.AddDocument(ProductDocument);
             if result then
             begin
@@ -602,7 +600,7 @@ begin
       // Check for changes.
       if (SharedmORMotData.ChangedProduct(SelectedProduct,RefreshNeeded) AND RefreshNeeded) then
       begin
-        // Due to version tracking, we now know that the battery has changed.
+        // Due to version tracking, we now know that the product has changed.
         // So, get the new data from the server !!
         SharedmORMotData.GetProduct(SelectedProduct);
       end;
